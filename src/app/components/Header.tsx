@@ -1,8 +1,10 @@
+// components/Header.tsx
+"use client"
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const Header = ({ showTitle = true }) => {
+const Header = ({ scrolledPastFirst = false, isHome = false }) => {
   const pathname = usePathname();
   
   const navItems = [
@@ -13,16 +15,18 @@ const Header = ({ showTitle = true }) => {
     { name: 'Blog', path: '/blog' },
   ];
 
+  const showTitleInHeader = !isHome || (isHome && scrolledPastFirst);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col items-center space-y-4">
-          {showTitle && (
-            <div className="text-center">
-              <h1 className="text-2xl font-bold tracking-tight">
+          {showTitleInHeader && (
+            <div className="text-center transition-all duration-500 ease-in-out">
+              <h1 className="text-2xl font-bold tracking-tight text-white">
                 Ernesto Rivera
               </h1>
-              <p className="text-lg italic tracking-tight opacity-90">
+              <p className="text-lg italic tracking-tight text-white opacity-90">
                 Bridging Tech and Industry: Innovating Solutions, Inspiring Change.
               </p>
             </div>
@@ -33,8 +37,8 @@ const Header = ({ showTitle = true }) => {
               <Link 
                 key={item.path} 
                 href={item.path}
-                className={`hover:text-black/70 transition-colors ${
-                  pathname === item.path ? 'border-b-2 border-black' : ''
+                className={`text-lg text-white hover:text-white/70 transition-colors ${
+                  pathname === item.path ? 'border-b-2 border-white' : ''
                 }`}
               >
                 {item.name}
