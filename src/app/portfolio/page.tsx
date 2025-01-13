@@ -115,18 +115,18 @@ export default function Portfolio() {
             we increased donation growth by up to 53% and utilized Digital Twin technology to optimize initiative success 
             across large member bases. The platform featured a real-time feedback loop for donors, transforming engagement 
             and transparency through a dynamic AI dashboard.
-            <br /><br />
+            <br />
             <b>Church & AI Hackathon, Best Technology &mdash; $50,000 Prize</b><br />
             In 2023, I contributed to building an AI-powered MetaHuman backend using Inworld AI and Unreal Engine for 
             immersive 3D interactions. This project pioneered personalized AI faith-based counselors, reducing costs by 
             100x through targeted ads and search engine tools. I played a pivotal role in crafting the technical 
             infrastructure and business strategy, establishing a strong foundation for Gloo&apos;s collaboration.
-            <br /><br />
+            <br />
             <b>Cornell Health Hackathon Finalist</b><br />
             As a finalist in 2023, I developed an AI-powered VR/AR therapy app to help individuals overcome phobias. I 
             also integrated GPT-3&apos;s API to create personalized prompts for immersive 360-degree environments using Stable 
             Diffusion, showcasing innovation in therapeutic applications.
-            <br /><br />
+            <br />
             <b>NASA Space Apps Global Nominee</b><br />
             At the 2022 NASA Space Apps Hackathon, I engineered an AI system to analyze over 22,500 datasets from public 
             NASA archives. By implementing GPT-3 and Stable Diffusion, I made complex datasets easily accessible for the 
