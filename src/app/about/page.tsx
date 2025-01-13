@@ -2,9 +2,11 @@
 import { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import ScrollIndicator from '../components/ScrollIndicator';
+import PageIndicator from '../components/PageIndicator';
 
 export default function About() {
   const [scrolledPastFirst, setScrolledPastFirst] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,6 +16,10 @@ export default function About() {
     const handleScroll = () => {
       const scrollPosition = container.scrollTop;
       setScrolledPastFirst(scrollPosition > container.clientHeight * 0.3);
+      
+      // Calculate current page based on scroll position
+      const currentPage = Math.round(scrollPosition / container.clientHeight);
+      setCurrentPage(currentPage);
     };
 
     container.addEventListener('scroll', handleScroll);
@@ -24,8 +30,11 @@ export default function About() {
     '/photos/about/about1.jpg',
     '/photos/about/about2.jpg',
     '/photos/about/about3.jpg',
-
+    '/photos/about/about4.jpg',
+    
   ];
+
+  const totalPages = images.length;
 
   return (
     <div 
@@ -50,8 +59,8 @@ export default function About() {
                         <p className="text-lg md:text-md text-justify">
                             As previously mentioned, I am Ernesto Rivera. I'm originally from Las Vegas, Nevada, where I discovered my 
                             passion for building. I thrived in robotics classes starting at 8 years old, but what stuck with me was 
-                            programming robots&mdash;something nobody else around me seemed to enjoy. At 12, I moved to California, where 
-                            I wasn't allowed to join the school's robotics team. This unexpected obstacle gave me the perfect opportunity 
+                            programming robots&mdash;something nobody else around me seemed to enjoy. At 12, I moved to California,
+                             where I couldn’t join the school’s robotics team due to circumstances beyond my control. This unexpected obstacle gave me the perfect opportunity 
                             to become part of the first-ever middle school group of students taking AP Computer Science A.
                             
                             <br /><br />While this Java class wasn't my best work, it opened Pandora's box to the world of programming. At Troy 
@@ -97,9 +106,8 @@ export default function About() {
                 One of my favorite fields is Computer Vision. Cameras are becoming more advanced and are now
                 integral to our daily lives, from smartphones to specialized devices like infrared and thermal 
                 cameras. My fascination with this field started in high school with Optical Character 
-                Recognition (OCR), which introduced me to the potential of programming. Papers like 
-                <a href="https://arxiv.org/abs/2308.13418" className="underline hover:text-white/70"> Nougat</a> 
-                fueled my curiosity, showcasing how AI can transform untapped visual data into meaningful insights. 
+                Recognition (OCR), which introduced me to the potential of programming. Papers like <a href="https://arxiv.org/abs/2308.13418" className="underline hover:text-white/70">Nougat</a> fueled
+                 my curiosity, showcasing how AI can transform untapped visual data into meaningful insights. 
                 <br /> <br />
                 Beyond vision, I’m captivated by Quantum Computing. What began as a curiosity after watching a TED 
                 Talk evolved into a deeper interest when I learned about efforts to use quantum computers to 
@@ -108,6 +116,11 @@ export default function About() {
                 </p>
             </div>
             </div>
+            <PageIndicator
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                visible={true}
+            />
         </div>
 
         {/* Second section - Entrepreneurship */}
@@ -142,19 +155,72 @@ export default function About() {
                 </div>
                 {/* Image container now matches parent height */}
                 <div className="flex bg-[#6f423c] bg-opacity-25 md:w-1/4">
-        <div className="relative w-full overflow-hidden">
-                <img
-                    src="/photos/about/hackathon.jpeg"
-                    alt="Professional headshot"
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                />
+                    <div className="relative w-full overflow-hidden">
+                    <img
+                        src="/photos/about/hackathon.jpeg"
+                        alt="Professional headshot"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
+                    />
                 </div>
             </div>
             </div>
+            <PageIndicator
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                visible={true}
+            />
         </div>
         </div>
 
-      {/* Additional sections as needed */}
+        {/* Second section - Personal Interests */}
+        <div className="snap-start relative h-screen w-full">
+            <img
+            src={images[3]}
+            alt="Secondary image"
+            className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center text-white p-4 max-w-7xl bg-[#999f9f] bg-opacity-35">
+                    <h2 className="text-4xl font-bold mb-6">Personal Interests</h2>
+                    <p className="text-md md:text-md text-justify">
+                        While tech and entrepreneurship are central to my journey, there’s so much more that defines who I am. First 
+                        and foremost, I’m grateful for my family and friends who have supported me in all my endeavors. Scattered 
+                        throughout my website are photos of my friends, which ties into one of my first passions: photography. All 
+                        the background photos on this website were taken with my film camera, a hobby that lets me preserve memories 
+                        from my travels.
+
+                        <br /><br />
+                        Travel is another passion of mine, and I love exploring new places, immersing myself in different cultures, 
+                        and&mdash;most importantly&mdash;trying the food. I consider myself a foodie who’s always open to trying 
+                        anything at least three times. My love for food extends to coffee, and in Fall 2024, I made one of my favorite 
+                        purchases: the Breville Bambino Plus Espresso Machine. Now, I enjoy experimenting with beans I’ve collected 
+                        from my travels, learning to appreciate the unique flavors of each roast.
+
+                        <br /><br />
+                        Living in Boston for school has its own perks, though I miss surfing and snowboarding back home in Southern 
+                        California. While I can’t enjoy those activities here, I’ve continued running, a sport I competed in all four 
+                        years of high school as a varsity cross country and track athlete. Running has remained a meaningful way for 
+                        me to stay active and grounded.
+
+                        <br /><br />
+                        I’m also passionate about leadership and connecting with others. As President of one of the leading business 
+                        fraternities at my university, I’ve been able to work with driven individuals from diverse fields. This role 
+                        has allowed me to expand my network and perspective beyond the tech world, which I’ve found incredibly rewarding.
+
+                        <br /><br />
+                        Lastly, music is a constant in my life. I listen to over 8 hours a day, enjoying genres like RnB, indie, and 
+                        EDM. I’ve attended more than 20 concerts, and music has become a source of energy and inspiration for me. 
+                        Whether it’s through food, travel, or music, these passions remind me to stay curious and live life fully.
+                    </p>
+                </div>
+            </div>
+            <PageIndicator
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                visible={true}
+            />
+        </div>
     </div>
   );
 }
