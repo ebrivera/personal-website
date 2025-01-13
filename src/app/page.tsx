@@ -63,10 +63,12 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black bg-opacity-30" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white p-4 max-w-4xl">
+          <div className="text-center text-white p-4 max-w-4xl bg-[#999f9f] bg-opacity-25">
             <h2 className="text-4xl font-bold mb-6">Welcome</h2>
-            <p className="text-xl">
-              Your welcome text or additional content here...
+            <p className="text-xl text-justify w-3/4 mx-auto">
+              I'm Ernesto Rivera, a third-year studying Computer Science with a minor in Data Science 
+              at Boston University. Thank you for taking the time to explore my website! Please checkout the different
+              pages in the navigation bar to learn more about the work I've done, my passions, and me!
             </p>
           </div>
         </div>
