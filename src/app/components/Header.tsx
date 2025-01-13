@@ -10,7 +10,6 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Blog', path: '/blog' },
   ];
 
   const showTitleInHeader = !isHome || (isHome && scrolledPastFirst);

@@ -3,10 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import ScrollIndicator from './components/ScrollIndicator';
+import PageIndicator from './components/PageIndicator';
 import Image from 'next/image'
 
 export default function Home() {
   const [scrolledPastFirst, setScrolledPastFirst] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,8 +18,12 @@ export default function Home() {
     const handleScroll = () => {
       const scrollPosition = container.scrollTop;
       setScrolledPastFirst(scrollPosition > container.clientHeight * 0.3);
+      
+      // Calculate current page based on scroll position
+      const currentPage = Math.round(scrollPosition / container.clientHeight);
+      setCurrentPage(currentPage);
     };
-  
+
     container.addEventListener('scroll', handleScroll);
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,6 +32,8 @@ export default function Home() {
     '/photos/home/home1.jpg',
     '/photos/home/home2.jpg',
   ];
+
+  const totalPages = images.length;
 
   return (
     <div className="snap-y snap-mandatory h-screen w-full overflow-y-auto scroll-smooth" ref={containerRef}>
@@ -37,6 +45,7 @@ export default function Home() {
           src={images[0]}
           alt="Hero image"
           className="absolute inset-0 w-full h-full object-cover"
+          fill={true}
         />
         <div className="absolute inset-0 bg-black bg-opacity-30" />
         {/* Only show centered title when NOT scrolled past first */}
@@ -61,6 +70,7 @@ export default function Home() {
           src={images[1]}
           alt="Secondary image"
           className="absolute inset-0 w-full h-full object-cover"
+          fill={true}
         />
         <div className="absolute inset-0 bg-black bg-opacity-30" />
         <div className="absolute inset-0 flex items-center justify-center">
@@ -73,9 +83,15 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <PageIndicator
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                visible={true}
+            />
       </div>
 
       {/* Additional sections as needed */}
+
     </div>
   );
 }

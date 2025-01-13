@@ -50,6 +50,7 @@ export default function About() {
             src={images[0]}
             alt="About Picture 1 (London Covent Garden)"
             className="absolute inset-0 w-full h-full object-cover"
+            fill={true}
             />
             <div className="absolute inset-0 bg-black bg-opacity-30" />
             {/* Added pt-24 to create space below navbar */}
@@ -78,6 +79,7 @@ export default function About() {
                             src="/photos/about/professional-headshot.jpg"
                             alt="Professional headshot"
                             className="absolute inset-0 w-full h-full object-cover object-center"
+                            fill={true}
                             />
                         </div>
                     </div>
@@ -92,6 +94,7 @@ export default function About() {
             src={images[1]}
             alt="Secondary image"
             className="absolute inset-0 w-full h-full object-cover"
+            fill={true}
             />
             <div className="absolute inset-0 bg-black bg-opacity-30" />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -130,6 +133,7 @@ export default function About() {
                 src={images[2]}
                 alt="Secondary image"
                 className="absolute inset-0 w-full h-full object-cover"
+                fill={true}
             />
             <div className="absolute inset-0 bg-black bg-opacity-30" />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -161,6 +165,7 @@ export default function About() {
                         src="/photos/about/hackathon.jpeg"
                         alt="Professional headshot"
                         className="absolute inset-0 w-full h-full object-cover object-center"
+                        fill={true}
                     />
                 </div>
             </div>
@@ -179,6 +184,7 @@ export default function About() {
             src={images[3]}
             alt="Secondary image"
             className="absolute inset-0 w-full h-full object-cover"
+            fill={true}
             />
             <div className="absolute inset-0 bg-black bg-opacity-30" />
             <div className="absolute inset-0 flex items-center justify-center">
