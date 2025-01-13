@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import ScrollIndicator from '../components/ScrollIndicator';
 import PageIndicator from '../components/PageIndicator';
+import Image from 'next/image';
 
 export default function Portfolio() {
   const [scrolledPastFirst, setScrolledPastFirst] = useState(false);
@@ -42,7 +43,7 @@ export default function Portfolio() {
       
         {/* Second section - About/Welcome */}
         <div className="snap-start relative h-screen w-full">
-        <img
+        <Image
         src={images[0]}
         alt="Secondary image"
         className="absolute inset-0 w-full h-full object-cover"
@@ -66,7 +67,7 @@ export default function Portfolio() {
                     scanner proof-of-concept, to demonstrate the potential of AI in construction management.
                     <br /> <br />
                     In the startup space, I served as a Founding Engineer at MyTA, where I developed an AI-powered 
-                    educational chatbot that integrated cutting-edge technologies like Meta AI's Nougat and Pinecone, 
+                    educational chatbot that integrated cutting-edge technologies like Meta AI&apos;s Nougat and Pinecone, 
                     improving content delivery by 50%. Collaborating with over 14 universities, I helped scale this 
                     platform to provide 24/7 personalized academic support to students, demonstrating my ability to 
                     build impactful, scalable solutions.
@@ -94,7 +95,7 @@ export default function Portfolio() {
 
       {/* Hackathon Projects Section */}
       <div className="snap-start relative h-screen w-full">
-        <img
+        <Image
           src={images[1]}
           alt="Portfolio background 2"
           className="absolute inset-0 w-full h-full object-cover"
@@ -117,7 +118,7 @@ export default function Portfolio() {
 
       {/* Personal Projects Section */}
       <div className="snap-start relative h-screen w-full">
-        <img
+        <Image
           src={images[2]}
           alt="Portfolio background 3"
           className="absolute inset-0 w-full h-full object-cover"
@@ -133,7 +134,7 @@ export default function Portfolio() {
             </div>
             <div className="flex flex-col bg-[#232728] bg-opacity-15 md:w-1/4">
               <div className="relative flex-grow w-full overflow-hidden">
-                <img
+                <Image
                   src="/photos/portfolio/personal-projects.jpg"
                   alt="Personal projects"
                   className="absolute inset-0 w-full h-full object-cover object-center"

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import ScrollIndicator from './components/ScrollIndicator';
+import Image from 'next/image'
 
 export default function Home() {
   const [scrolledPastFirst, setScrolledPastFirst] = useState(false);
@@ -32,7 +33,7 @@ export default function Home() {
       
       {/* First section - Welcome */}
       <div className="snap-start relative h-screen w-full">
-        <img
+        <Image
           src={images[0]}
           alt="Hero image"
           className="absolute inset-0 w-full h-full object-cover"
@@ -56,7 +57,7 @@ export default function Home() {
 
       {/* Second section - About/Welcome */}
       <div className="snap-start relative h-screen w-full">
-        <img
+        <Image
           src={images[1]}
           alt="Secondary image"
           className="absolute inset-0 w-full h-full object-cover"
@@ -66,9 +67,9 @@ export default function Home() {
           <div className="text-center text-white p-4 max-w-4xl bg-[#999f9f] bg-opacity-25">
             <h2 className="text-4xl font-bold mb-6">Welcome</h2>
             <p className="text-xl text-justify w-3/4 mx-auto">
-              I'm Ernesto Rivera, a third-year studying Computer Science with a minor in Data Science 
+              I&apos;m Ernesto Rivera, a third-year studying Computer Science with a minor in Data Science 
               at Boston University. Thank you for taking the time to explore my website! Please checkout the different
-              pages in the navigation bar to learn more about the work I've done, my passions, and me!
+              pages in the navigation bar to learn more about the work I&apos;ve done, my passions, and me!
             </p>
           </div>
         </div>
