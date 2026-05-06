@@ -1,15 +1,19 @@
 // components/Header.tsx
 "use client"
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 
 const Header = ({ scrolledPastFirst = false, isHome = false }) => {
   const pathname = usePathname();
-  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const showTitleInHeader = !isHome || (isHome && scrolledPastFirst);
@@ -28,11 +32,12 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
               </p>
             </div>
           )}
-          
-          <nav className="flex space-x-8">
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <Link 
-                key={item.path} 
+              <Link
+                key={item.path}
                 href={item.path}
                 className={`text-lg text-white hover:text-white/70 transition-colors ${
                   pathname === item.path ? 'border-b-2 border-white' : ''
@@ -42,8 +47,44 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
               </Link>
             ))}
           </nav>
+
+          {/* Mobile hamburger button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu size={28} />
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center md:hidden">
+          <button
+            className="absolute top-6 right-6 text-white"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X size={32} />
+          </button>
+          <nav className="flex flex-col items-center space-y-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-2xl text-white hover:text-white/70 transition-colors ${
+                  pathname === item.path ? 'border-b-2 border-white' : ''
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
