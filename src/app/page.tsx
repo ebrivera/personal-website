@@ -22,7 +22,7 @@ export default function Home() {
           priority={true}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 photo-scrim" />
         {/* Only show centered title when NOT scrolled past first */}
         <SnapHeroTitle />
         <SnapScrollIndicator />
@@ -38,13 +38,14 @@ export default function Home() {
           priority={true}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 photo-scrim" />
         <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-          <div className="text-center text-white p-4 max-w-4xl bg-[#999f9f] bg-opacity-25 overflow-y-auto max-h-[80vh] md:max-h-none">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Welcome</h2>
-            <p className="text-base md:text-xl text-justify w-3/4 mx-auto">
-              I&apos;m Ernesto Rivera, a third-year studying Computer Science with a minor in Data Science
-              at Boston University. Thank you for taking the time to explore my website! Please checkout the different
+          <div className="surface-card rounded-xl text-paper p-6 md:p-8 max-w-2xl overflow-y-auto max-h-[80vh] md:max-h-none">
+            <p className="eyebrow text-amber text-xs mb-3">Welcome</p>
+            <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Ernesto Rivera</h2>
+            <p className="text-base md:text-lg leading-relaxed text-paper/90">
+              I&apos;m a recent graduate of Boston University, where I studied Computer Science.
+              Thank you for taking the time to explore my website! Please checkout the different
               pages in the navigation bar to learn more about the work I&apos;ve done, my passions, and me!
             </p>
           </div>

@@ -73,12 +73,12 @@ export function SnapHeroTitle() {
   if (scrolledPastFirst) return null;
   return (
     <div className="absolute inset-0 flex items-center justify-center">
-      <div className="text-center text-white p-4">
-        <h1 className="text-2xl sm:text-4xl lg:text-9xl font-bold tracking-tight">
+      <div className="text-center text-paper p-4">
+        <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl font-semibold tracking-tight">
           Ernesto Rivera
         </h1>
-        <h2 className="text-2xl lg:text-4xl pl-1 tracking-tight italic">
-          Bridging Tech and Industry: Innovating Solutions, Inspiring Change.
+        <h2 className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-amber mt-4">
+          Bridging Tech and Industry: Innovating Solutions, Inspiring Change
         </h2>
       </div>
     </div>

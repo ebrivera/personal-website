@@ -4,17 +4,19 @@ interface PageIndicatorProps {
     totalPages: number;
     visible: boolean;
   }
-  
+
   const PageIndicator = ({ currentPage, totalPages, visible }: PageIndicatorProps) => {
     if (!visible) return null;
-    
+
     return (
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80">
-        <div className="bg-black/20 px-4 py-2 rounded-full text-sm">
-          Page {currentPage + 1} / {totalPages}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 bg-ink/30 px-4 py-2 rounded-full">
+          Frame <span className="text-amber">{String(currentPage + 1).padStart(2, '0')}</span>
+          {' '}&mdash;{' '}
+          {String(totalPages).padStart(2, '0')}
         </div>
       </div>
     );
   };
-  
+
   export default PageIndicator;

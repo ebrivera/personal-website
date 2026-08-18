@@ -7,10 +7,10 @@ interface ScrollIndicatorProps {
 
 const ScrollIndicator = ({ visible }: ScrollIndicatorProps) => {
   return visible ? (
-    <div className="absolute bottom-8 w-full flex justify-center text-white text-center">
+    <div className="absolute bottom-8 w-full flex justify-center text-paper text-center">
       <div className="flex flex-col items-center space-y-2 animate-bounce">
-        <p className="text-sm font-light tracking-wider">Keep scrolling for more</p>
-        <ChevronDown className="w-6 h-6" />
+        <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70">Keep scrolling</p>
+        <ChevronDown className="w-5 h-5 text-amber" />
       </div>
     </div>
   ) : null;

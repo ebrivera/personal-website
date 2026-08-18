@@ -24,12 +24,22 @@ export default function Portfolio() {
         priority={true}
         sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 photo-scrim" />
         <div className="absolute inset-0 flex flex-col items-center justify-center pt-16 md:pt-20">
-            <div className="text-white p-4 md:p-6 max-w-3xl w-full overflow-y-auto max-h-[75vh] md:max-h-[80vh]">
-                <h2 className="text-2xl md:text-4xl font-bold mb-2 text-center">Professional Experience</h2>
-                <p className="text-white/60 text-xs text-center mb-6">Tap to expand</p>
+            <div className="text-paper p-4 md:p-6 max-w-3xl w-full overflow-y-auto max-h-[75vh] md:max-h-[80vh]">
+                <p className="eyebrow text-amber text-xs text-center mb-3">Career</p>
+                <h2 className="font-display text-2xl md:text-4xl font-semibold mb-2 text-center">Professional Experience</h2>
+                <p className="font-mono text-paper/60 text-xs tracking-wide uppercase text-center mb-6">Tap to expand</p>
                 <div className="space-y-2">
+                    <ExpandableCard title="Software Developer, IBM" subtitle="Jul 2026 - Present | San Jose, CA">
+                        <p>Contribute to a production webhook-driven AI-agent pipeline in watsonx Orchestrate, streamlining QA intake and containment review while reducing manual handoffs. Proposed and built a webhook simulator that cut per-case test time from 45 minutes to 3 minutes for every end-to-end permutation ahead of a product launch, which led to being elected to architect a from-scratch E2E validation framework for the broader team.</p>
+                    </ExpandableCard>
+                    <ExpandableCard title="Founder, Cantena" subtitle="Oct 2025 - Apr 2026 | Remote">
+                        <p>Started in agentic coding and search tooling for enterprises, reaching state-of-the-art performance within a day of building. Recognized a stronger edge in construction and pivoted to pre-construction workflows, onboarding 11 construction firms within 3 weeks. Presented twice to Y Combinator and interviewed with Pear VC. Read the{' '}
+                        <a href="https://drive.google.com/file/d/1fZCtu-E_MWIaZ2YoC1SB_BY01nnN8ZUt/view" className="text-amber underline hover:text-amber/70" target="_blank" rel="noopener noreferrer">decision memo</a>{' '}
+                        and{' '}
+                        <a href="https://drive.google.com/file/d/1c-oh0XRVXs9Xecmp5WGVk_8R4TM32PUZ/view?usp=sharing" className="text-amber underline hover:text-amber/70" target="_blank" rel="noopener noreferrer">pre-construction memo</a>.</p>
+                    </ExpandableCard>
                     <ExpandableCard title="Software Engineer Intern, Wayfair" subtitle="Summer 2025 | Boston, MA">
                         <p>Full-stack development on fintech microservices using PHP, TypeScript, and Apollo GraphQL. Built and optimized landing pages, improved SEO, implemented end-to-end testing with Jest, and ensured cross-browser accessibility compliance. Monitored production systems with Datadog and Kibana.</p>
                     </ExpandableCard>
@@ -61,11 +71,12 @@ export default function Portfolio() {
           priority={true}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 photo-scrim" />
         <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-          <div className="text-white p-4 md:p-6 max-w-3xl w-full overflow-y-auto max-h-[75vh] md:max-h-[80vh]">
-            <h2 className="text-2xl md:text-4xl font-bold mb-1 text-center">Hackathon Projects</h2>
-            <p className="text-white/60 text-xs text-center mb-6">$65,000+ in prizes across 10+ hackathons</p>
+          <div className="text-paper p-4 md:p-6 max-w-3xl w-full overflow-y-auto max-h-[75vh] md:max-h-[80vh]">
+            <p className="eyebrow text-amber text-xs text-center mb-3">Hackathons</p>
+            <h2 className="font-display text-2xl md:text-4xl font-semibold mb-1 text-center">Hackathon Projects</h2>
+            <p className="font-mono text-paper/60 text-xs tracking-wide uppercase text-center mb-6">$65,000+ in prizes across 10+ hackathons</p>
             <div className="space-y-2">
               <ExpandableCard title="Church & AI 2024, Best Concept" subtitle="$15,000 Prize">
                 <p>Led creation of <i>Generosity</i>, an AI-driven platform to unlock $50B in annual church donations. Built AI-powered donor-cause matching algorithms that increased donation growth by 53%. Used Digital Twin technology to optimize initiative success across large member bases with a real-time feedback loop and dynamic AI dashboard.</p>
@@ -95,44 +106,37 @@ export default function Portfolio() {
           priority={true}
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 photo-scrim" />
         <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-        <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-6xl px-8 md:px-16 gap-6 md:gap-10 max-h-[85vh] md:max-h-none">
-            <div className="text-white p-4 md:p-6 w-full md:w-2/3 overflow-y-auto max-h-[70vh] md:max-h-none">
-              <h2 className="text-2xl md:text-4xl font-bold mb-2 text-center">Personal Projects</h2>
-              <p className="text-white/60 text-xs text-center mb-6">Tap to expand</p>
-              <div className="space-y-2">
-                <ExpandableCard title="Cantena" subtitle="SaaS for AI code understanding">
-                    <p>A hosted platform that gives AI coding assistants (Cursor, Claude Code) semantic code understanding via the Model Context Protocol. Indexes repositories into a Neo4j graph database with 19 edge types, enabling token-efficient exploration, structural awareness, and blast radius analysis before code changes. Built with TypeScript, Neo4j, Pinecone, and OpenAI embeddings.</p>
-                </ExpandableCard>
-                <ExpandableCard title="OCR Digit Classifier" subtitle="Machine learning">
-                    <p>Custom KNN model for handwritten digit recognition on MNIST, achieving 95% accuracy through optimized preprocessing and feature extraction. Built a real-time GUI with Python, Tkinter, PIL, and NumPy.</p>
-                </ExpandableCard>
-                <ExpandableCard title="AI Interview Bot" subtitle="Full-stack AI application">
-                    <p>Real-time interview prep tool using OpenAI, Flask, Next.js, and WebSockets. Provides feedback, grades responses, and tailors questions to specific industries, companies, and job positions.</p>
-                </ExpandableCard>
-              </div>
+          <div className="text-paper p-4 md:p-6 max-w-3xl w-full overflow-y-auto max-h-[75vh] md:max-h-[80vh]">
+            <p className="eyebrow text-amber text-xs text-center mb-3">Side Builds</p>
+            <h2 className="font-display text-2xl md:text-4xl font-semibold mb-2 text-center">Personal Projects</h2>
+            <p className="font-mono text-paper/60 text-xs tracking-wide uppercase text-center mb-6">Tap to expand</p>
+            <div className="space-y-2">
+              <ExpandableCard title="Swarm" subtitle="Browser-native distributed LLM training">
+                  <p>H100s are hard to come by for personal use, and it turns out the pool of friends willing to lend compute is much bigger than the pool comfortable using a terminal. Built a browser-native distributed GPT-2 trainer that partitions transformer layers across GPU-backed Chrome workers using TensorFlow.js, WebRTC, and 1F1B pipeline parallelism. Validated a 774M-parameter GPT-2 Large model across 6 Chrome workers in 3 AWS regions, using DiLoCo and SparseLoCo to cut synchronization traffic by ~65x, plus gradient checkpointing and 8-bit Adam to reduce activation memory by ~60% and optimizer-state memory by 4x.{' '}
+                  <a href="https://bookmarks-audience-himself-commons.trycloudflare.com/" className="text-amber underline hover:text-amber/70" target="_blank" rel="noopener noreferrer">Check it out</a>.</p>
+              </ExpandableCard>
+              <ExpandableCard title="Agent Checkout Proof" subtitle="Is your AI agent ready to pay?">
+                  <p>A wallet-spendability scanner that checks whether a product page gives an AI shopping agent everything it needs to transact safely: item identification, all-in pricing, visible payment methods, a clear risk/refund policy, and a verifiable record of what it found.{' '}
+                  <a href="https://isyouragentreadytopay.vercel.app" className="text-amber underline hover:text-amber/70" target="_blank" rel="noopener noreferrer">Check it out</a>.</p>
+              </ExpandableCard>
+              <ExpandableCard title="OCR Digit Classifier" subtitle="Machine learning">
+                  <p>Custom KNN model for handwritten digit recognition on MNIST, achieving 95% accuracy through optimized preprocessing and feature extraction. Built a real-time GUI with Python, Tkinter, PIL, and NumPy.</p>
+              </ExpandableCard>
+              <ExpandableCard title="AI Interview Bot" subtitle="Full-stack AI application">
+                  <p>Real-time interview prep tool using OpenAI, Flask, Next.js, and WebSockets. Provides feedback, grades responses, and tailors questions to specific industries, companies, and job positions.</p>
+              </ExpandableCard>
             </div>
-            <div className="flex flex-col md:w-1/3">
-              <div className="relative flex-grow w-full overflow-hidden rounded-lg min-h-[200px]">
-                <Image
-                  src="/photos/portfolio/cantena-graph.jpg"
-                  alt="Cantena knowledge graph visualization"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                  fill={true}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-              <div className="mt-4">
-                <ExternalLinkButton
-                    href="https://github.com/ebrivera"
-                    className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg transition-colors w-full text-sm"
-                >
-                    View GitHub
-                </ExternalLinkButton>
-              </div>
+            <div className="mt-6 flex justify-center">
+              <ExternalLinkButton
+                  href="https://github.com/ebrivera"
+                  className="font-mono text-xs tracking-wide uppercase border border-amber/50 text-amber hover:bg-amber hover:text-ink px-6 py-3 rounded-lg transition-colors"
+              >
+                  View GitHub
+              </ExternalLinkButton>
             </div>
-        </div>
+          </div>
         </div>
         <SnapPageIndicator totalPages={totalPages} />
       </div>

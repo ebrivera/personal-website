@@ -23,13 +23,14 @@ export default function About() {
             priority={true}
             sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30" />
+            <div className="absolute inset-0 photo-scrim" />
             {/* Added pt-24 to create space below navbar */}
             <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-                <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-8xl px-8 md:px-16 gap-8 md:gap-12 max-h-[85vh] md:max-h-none">
-                    <div className="text-center text-white p-6 md:p-8 bg-[#232728] bg-opacity-15 w-full md:w-3/4 overflow-y-auto max-h-[70vh] md:max-h-none">
-                        <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Why Computer Science?</h2>
-                        <p className="text-sm md:text-md text-justify">
+                <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-6xl px-8 md:px-16 gap-6 md:gap-8 max-h-[85vh] md:max-h-none">
+                    <div className="surface-card rounded-xl text-left text-paper p-6 md:p-8 w-full md:w-3/4 overflow-y-auto max-h-[70vh] md:max-h-none">
+                        <p className="eyebrow text-amber text-xs mb-3">Origins</p>
+                        <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Why Computer Science?</h2>
+                        <p className="text-sm md:text-base leading-relaxed text-paper/90">
                             As previously mentioned, I am Ernesto Rivera. I&apos;m originally from Las Vegas, Nevada, where I discovered my
                             passion for building. I thrived in robotics classes starting at 8 years old, but what stuck with me was
                             programming robots, something nobody else around me seemed to enjoy. At 12, I moved to California,
@@ -40,20 +41,17 @@ export default function About() {
                             High School, I was required to choose a pathway, much like selecting a major. I furthered my programming
                             journey by choosing the Computer Science pathway, where I eventually completed four years of programming
                             coursework. I share this story because, for many, Computer Science is a field they pursue primarily for the lucrative
-                            paycheck it offers. But for me, Computer Science was a <i><b>passion</b></i> long before it became a career opportunity.
+                            paycheck it offers. But for me, Computer Science was a <span className="text-amber italic">passion</span> long before it became a career opportunity.
                         </p>
                     </div>
-                    {/* Image container now matches parent height */}
-                    <div className="flex bg-[#6f423c] bg-opacity-25 md:w-1/4">
-                        <div className="relative w-full overflow-hidden">
-                            <Image
-                            src="/photos/about/professional-headshot.jpg"
-                            alt="Professional headshot"
-                            className="absolute inset-0 w-full h-full object-cover object-center"
-                            fill={true}
-                            sizes="(max-width: 768px) 100vw, 25vw"
-                            />
-                        </div>
+                    <div className="relative w-full md:w-1/4 rounded-xl overflow-hidden border border-paper/12 min-h-[160px]">
+                        <Image
+                        src="/photos/about/professional-headshot.jpg"
+                        alt="Professional headshot"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
+                        fill={true}
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                        />
                     </div>
                 </div>
             </div>
@@ -70,11 +68,12 @@ export default function About() {
             priority={true}
             sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30" />
+            <div className="absolute inset-0 photo-scrim" />
             <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-            <div className="text-center text-white p-4 max-w-4xl bg-[#999f9f] bg-opacity-25 overflow-y-auto max-h-[80vh] md:max-h-none">
-                <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Technical Interests</h2>
-                <p className="text-sm md:text-md text-justify">
+            <div className="surface-card rounded-xl text-left text-paper p-6 md:p-8 max-w-3xl overflow-y-auto max-h-[80vh] md:max-h-none">
+                <p className="eyebrow text-amber text-xs mb-3">Focus</p>
+                <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Technical Interests</h2>
+                <p className="text-sm md:text-base leading-relaxed text-paper/90">
                 Computer Science has always been a passion of mine, deeply shaping my interests in the industry.
                 I&apos;m particularly intrigued by the intersection of technology and its practical applications,
                 especially how tools like Artificial Intelligence can drive innovation across various sectors.
@@ -84,7 +83,7 @@ export default function About() {
                 One of my favorite fields is Computer Vision. Cameras are becoming more advanced and are now
                 integral to our daily lives, from smartphones to specialized devices like infrared and thermal
                 cameras. My fascination with this field started in high school with Optical Character
-                Recognition (OCR), which introduced me to the potential of programming. Papers like <a href="https://arxiv.org/abs/2308.13418" className="underline hover:text-white/70">Nougat</a> fueled
+                Recognition (OCR), which introduced me to the potential of programming. Papers like <a href="https://arxiv.org/abs/2308.13418" className="text-amber underline hover:text-amber/70" target="_blank" rel="noopener noreferrer">Nougat</a> fueled
                  my curiosity, showcasing how AI can transform untapped visual data into meaningful insights.
                 <br /> <br />
                 Beyond vision, I&apos;m captivated by Quantum Computing. What began as a curiosity after watching a TED
@@ -107,12 +106,13 @@ export default function About() {
                 priority={true}
                 sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30" />
+            <div className="absolute inset-0 photo-scrim" />
             <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-                <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-8xl px-8 md:px-16 gap-8 md:gap-12 max-h-[85vh] md:max-h-none">
-                <div className="text-center text-white p-6 md:p-8 bg-[#232728] bg-opacity-15 w-full md:w-3/4 overflow-y-auto max-h-[70vh] md:max-h-none">
-                    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Entrepreneurship Endeavors</h2>
-                    <p className="text-sm md:text-md text-justify">
+                <div className="flex flex-col md:flex-row justify-between items-stretch w-full max-w-6xl px-8 md:px-16 gap-6 md:gap-8 max-h-[85vh] md:max-h-none">
+                <div className="surface-card rounded-xl text-left text-paper p-6 md:p-8 w-full md:w-3/4 overflow-y-auto max-h-[70vh] md:max-h-none">
+                    <p className="eyebrow text-amber text-xs mb-3">Building</p>
+                    <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Entrepreneurship Endeavors</h2>
+                    <p className="text-sm md:text-base leading-relaxed text-paper/90">
                     My passion for entrepreneurship and hackathons has been a major driver in my journey with technology.
                     During a gap semester before college, I joined my first hackathon: the NASA Space Apps Competition.
                     Our team became Global Nominees, which sparked my fascination with using technology to address
@@ -130,18 +130,15 @@ export default function About() {
                     the potential of startups to create meaningful change.
                     </p>
                 </div>
-                {/* Image container now matches parent height */}
-                <div className="flex bg-[#6f423c] bg-opacity-25 md:w-1/4">
-                    <div className="relative w-full overflow-hidden">
+                <div className="relative w-full md:w-1/4 rounded-xl overflow-hidden border border-paper/12 min-h-[160px]">
                     <Image
                         src="/photos/about/hackathon.jpeg"
-                        alt="Professional headshot"
+                        alt="Hackathon team photo"
                         className="absolute inset-0 w-full h-full object-cover object-center"
                         fill={true}
                         sizes="(max-width: 768px) 100vw, 25vw"
                     />
                 </div>
-            </div>
             </div>
             <SnapPageIndicator totalPages={totalPages} />
         </div>
@@ -157,11 +154,12 @@ export default function About() {
             priority={true}
             sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30" />
+            <div className="absolute inset-0 photo-scrim" />
             <div className="absolute inset-0 flex items-center justify-center pt-16 md:pt-20">
-                <div className="text-center text-white p-4 max-w-7xl bg-[#999f9f] bg-opacity-35 overflow-y-auto max-h-[80vh] md:max-h-none">
-                    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Personal Interests</h2>
-                    <p className="text-xs md:text-md text-justify">
+                <div className="surface-card rounded-xl text-left text-paper p-6 md:p-8 max-w-5xl overflow-y-auto max-h-[80vh] md:max-h-none">
+                    <p className="eyebrow text-amber text-xs mb-3">Off the clock</p>
+                    <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Personal Interests</h2>
+                    <p className="text-xs md:text-base leading-relaxed text-paper/90">
                         While tech and entrepreneurship are central to my journey, there&apos;s so much more that defines who I am. First
                         and foremost, I&apos;m grateful for my family and friends who have supported me in all my endeavors. Scattered
                         throughout my website are photos of my friends, which ties into one of my first passions: photography. All
@@ -176,15 +174,15 @@ export default function About() {
                         from my travels, learning to appreciate the unique flavors of each roast.
 
                         <br /><br />
-                        Living in Boston for school has its own perks, though I miss surfing and snowboarding back home in Southern
-                        California. While I can&apos;t enjoy those activities here, I&apos;ve continued running, a sport I competed in all four
+                        I grew up surfing and snowboarding in Southern California, and while I don&apos;t get out on the waves or slopes as
+                        often these days, I&apos;ve continued running, a sport I competed in all four
                         years of high school as a varsity cross country and track athlete. Running has remained a meaningful way for
                         me to stay active and grounded.
 
                         <br /><br />
                         I&apos;m also passionate about leadership and connecting with others. As President of one of the leading business
-                        fraternities at my university, I&apos;ve been able to work with driven individuals from diverse fields. This role
-                        has allowed me to expand my network and perspective beyond the tech world, which I&apos;ve found incredibly rewarding.
+                        fraternities at my university, I worked with driven individuals from diverse fields. This role
+                        allowed me to expand my network and perspective beyond the tech world, which I found incredibly rewarding.
 
                         <br /><br />
                         Lastly, music is a constant in my life. I listen to over 8 hours a day, enjoying genres like RnB, indie, and
