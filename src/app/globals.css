@@ -5,6 +5,7 @@
 :root {
   --font-sans: Helvetica, "Helvetica Neue", Arial, sans-serif;
   --font-mono: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  --font-display: Helvetica, "Helvetica Neue", Arial, sans-serif;
 }
 
 html {

@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-
-const plexSerif = IBM_Plex_Serif({
-  weight: ['500', '600', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-display',
-});
 
 export const metadata: Metadata = {
   title: "Ernesto Rivera",
@@ -21,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={plexSerif.variable}>
+    <html lang="en">
       <body className="antialiased font-sans" suppressHydrationWarning={true}>
         {children}
         <Analytics />
