@@ -35,7 +35,6 @@ export default function Home() {
           alt="Secondary image"
           className="absolute inset-0 w-full h-full object-cover"
           fill={true}
-          priority={true}
           sizes="100vw"
         />
         <div className="absolute inset-0 photo-scrim" />
@@ -45,8 +44,8 @@ export default function Home() {
             <h2 className="font-display text-2xl md:text-4xl font-semibold mb-4 md:mb-6">Ernesto Rivera</h2>
             <p className="text-base md:text-lg leading-relaxed text-paper/90">
               I&apos;m a recent graduate of Boston University, where I studied Computer Science.
-              Thank you for taking the time to explore my website! Please checkout the different
-              pages in the navigation bar to learn more about the work I&apos;ve done, my passions, and me!
+              Thanks for taking the time to explore my website &mdash; check out the pages in the nav bar
+              to learn more about my work, my passions, and me!
             </p>
           </div>
         </div>

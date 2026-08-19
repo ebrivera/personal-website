@@ -68,7 +68,6 @@ export default function Portfolio() {
           alt="Portfolio background 2"
           className="absolute inset-0 w-full h-full object-cover"
           fill={true}
-          priority={true}
           sizes="100vw"
         />
         <div className="absolute inset-0 photo-scrim" />
@@ -103,7 +102,6 @@ export default function Portfolio() {
           alt="Portfolio background 3"
           className="absolute inset-0 w-full h-full object-cover"
           fill={true}
-          priority={true}
           sizes="100vw"
         />
         <div className="absolute inset-0 photo-scrim" />
