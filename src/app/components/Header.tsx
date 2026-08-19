@@ -23,8 +23,9 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/35 to-transparent pointer-events-none" />
       <div
-        className={`container mx-auto px-4 transition-[padding] duration-500 ease-in-out ${
+        className={`relative container mx-auto px-4 transition-[padding] duration-500 ease-in-out ${
           scrolledPastFirst ? 'py-3' : 'py-6'
         }`}
       >
