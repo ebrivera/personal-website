@@ -513,18 +513,18 @@ $('#pi').style.width=(t/L*100)+'%';
     $('#lbl').textContent=d.playing?'on Spotify':(d.playedAt?'last played '+ago(d.playedAt):'last played');
     $('.eq').style.visibility=d.playing?'visible':'hidden';
     $('.qhead span').textContent=d.playing?"I'll hear it after this song":"it plays next time I'm listening";
-    showUpNext(d.upNext||[]);
+    showUpNext(d.upNext||[],d.moreQueued||0);
     paint();
   }
   // Shared queue: the bar shows the next song, the popup lists the next few, visitor adds carry their name.
-  function showUpNext(list){
+  function showUpNext(list,more){
     const from=x=>x.from?' · from '+esc(x.from):'';
     let u=$('.upnext');
     if(list.length){if(!u){u=document.createElement('span');u.className='upnext';$('.np .t').after(u)}
       u.innerHTML='up next: '+esc(list[0].title)+from(list[0])}
     else if(u)u.remove();
     const q=$('#qup');q.hidden=!list.length;
-    q.innerHTML=list.length?'coming up'+list.map(x=>`<div><b>${esc(x.title)}</b> ${esc(x.artist)}${from(x)}</div>`).join(''):'';
+    q.innerHTML=list.length?'coming up'+list.map(x=>`<div><b>${esc(x.title)}</b> ${esc(x.artist)}${from(x)}</div>`).join('')+(more?`<div>+${more} more queued by visitors</div>`:''):'';
   }
   async function poll(fresh){
     try{const r=await fetch('/api/spotify/now-playing'+(fresh?'?t='+Date.now():''),{cache:'no-store'});if(!r.ok)return false;

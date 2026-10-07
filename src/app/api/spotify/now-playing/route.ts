@@ -2,17 +2,20 @@ import { NextResponse } from "next/server";
 import { api, isConfigured, slimTrack } from "@/lib/spotify";
 import { whoAdded } from "@/lib/visitorAdds";
 
-// The next few songs in the queue, each tagged with the visitor who added it (or null).
+// The next few songs in the queue, each tagged with the visitor who added it (or null),
+// plus how many more visitor-added songs are waiting further back.
 async function upNext() {
+  const none = { upNext: [], moreQueued: 0 };
   try {
     const res = await api("/me/player/queue");
-    if (!res.ok) return [];
+    if (!res.ok) return none;
     const data = await res.json();
-    const tracks = (data?.queue ?? []).filter((t: { type?: string }) => t?.type === "track").slice(0, 3).map(slimTrack);
+    const tracks = (data?.queue ?? []).filter((t: { type?: string }) => t?.type === "track").map(slimTrack);
     const names = await whoAdded(tracks.map((t: { uri: string }) => t.uri));
-    return tracks.map((t: ReturnType<typeof slimTrack>, i: number) => ({ ...t, from: names[i] ?? null }));
+    const tagged = tracks.map((t: ReturnType<typeof slimTrack>, i: number) => ({ ...t, from: names[i] ?? null }));
+    return { upNext: tagged.slice(0, 3), moreQueued: tagged.slice(3).filter((t: { from: string | null }) => t.from).length };
   } catch {
-    return [];
+    return none;
   }
 }
 
@@ -33,7 +36,7 @@ export async function GET() {
             playing: data.is_playing,
             progressMs: data.progress_ms,
             track: slimTrack(data.item),
-            upNext: data.is_playing ? await upNext() : [],
+            ...(data.is_playing ? await upNext() : { upNext: [], moreQueued: 0 }),
           },
           { headers },
         );
