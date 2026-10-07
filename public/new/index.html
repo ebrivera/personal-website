@@ -346,12 +346,12 @@ const SVG={
  receiver:(w)=>`<img class="recv" style="width:${w}px" src="p/receiver.jpg" alt="vintage stereo receiver">`
 };
 const A='/new/p/';
-const IMG={travel:['scroll.webp','a rolled up travel log'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['receiver.jpg','1971 Pioneer stereo receiver'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
+const IMG={travel:['scroll.webp','a rolled up travel log'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['receiver.webp','1978 Sansui G-6000 stereo receiver'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
  {id:'travel',label:'places',x:5,r:-4,dy:'1cqw',mini:pic('travel',60)},
- {id:'film',label:'photos',x:17,r:-8,dy:'-9cqw',mini:pic('film',138)},
- {id:'hifi',label:'listening',x:47,r:-2,dy:'-9cqw',mini:pic('hifi',160)},
+ {id:'film',label:'photos',x:17,r:-8,dy:'-2cqw',mini:pic('film',138)},
+ {id:'hifi',label:'listening',x:47,r:-2,dy:'-5cqw',mini:pic('hifi',156)},
  {id:'coffee',label:'coffee',x:36,r:3,dy:'-3cqw',mini:pic('coffee',112)},
  {id:'tri',label:'training',x:74,r:6,dy:'-1cqw',mini:pic('tri',118)}
 ];
@@ -370,7 +370,7 @@ const BACK={
   <p class="credit">Bag: Tigerwalk Espresso, product photo from Equator Coffees</p>`,
  hifi:`<h4>What I listen on</h4><dl><dt>speakers</dt><dd>ELAC towers</dd><dt>amp</dt><dd>WiiM</dd><dt>dream</dt><dd>JBL L82</dd>
   <dt>note</dt><dd><span class="ph2">a line about your setup or a record to try</span></dd></dl>
-  <p class="credit">Receiver ad scan: Pioneer SX-2500, 1971, by Nesster, CC BY 2.0</p>`,
+  <p class="credit">Receiver: Sansui G-6000, 1978 ad scan by Nesster, CC BY 2.0</p>`,
  tri:`<h4>Training</h4><dl><dt>race</dt><dd>Santa Cruz City Tri, Olympic distance</dd><dt>distance</dt><dd>1.5 km swim, 40 km bike, 10 km run</dd>
   <dt>why</dt><dd><span class="ph2">why you race, or your goal time</span></dd></dl>
   <p class="credit">Bib: Wharf to Wharf 2012 by fogcat5, CC BY-SA 2.0</p>`,
