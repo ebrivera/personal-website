@@ -198,8 +198,8 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 /* ---------- show and tell: the toy chest ---------- */
 .hint{color:var(--faint);font-size:13px;margin:-6px 0 14px}
 .chestwrap{max-width:560px;container-type:inline-size;margin-top:14px}
-.chest{position:relative;width:100%;aspect-ratio:560/370}
-.chest .st{position:absolute;bottom:50%;border:0;padding:0;background:none;cursor:pointer;
+.chest{position:relative;width:100%;aspect-ratio:560/250}
+.chest .st{position:absolute;bottom:10%;border:0;padding:0;background:none;cursor:pointer;
   transform:translateY(var(--dy,0)) rotate(var(--r,0deg));transform-origin:50% 100%;
   transition:transform .45s var(--ease),filter .3s;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));z-index:1}
 .chest .st:hover,.chest .st:focus-visible{transform:translateY(calc(var(--dy,0px) - 7cqw)) rotate(calc(var(--r,0deg) * .4))}
@@ -208,7 +208,9 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .chest .st .tag{position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:11.5px;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .25s}
 .chest .st:hover .tag,.chest .st:focus-visible .tag{opacity:1}
 .chest .box{position:absolute;left:7%;right:7%;bottom:0;z-index:2;pointer-events:none}
-.chest .box img{width:100%;display:block;filter:drop-shadow(0 14px 18px rgba(0,0,0,.28))}
+.chest .box img{width:100%;display:block;filter:drop-shadow(0 12px 14px rgba(0,0,0,.3))}
+.chest .inside{position:absolute;left:9.5%;right:9.5%;bottom:2.5%;z-index:0;pointer-events:none}
+.chest .inside img{width:100%;display:block}
 .recv{border-radius:6px}
 .fly{position:fixed;z-index:22;margin:0;pointer-events:none;max-width:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));will-change:transform}
 
@@ -365,6 +367,7 @@ const PAGES={
   <div class="sec"><h3>Show and tell</h3><p class="hint">pull something out of the chest</p>
    <div class="chestwrap"><div class="chest" id="chest">
     ${STICKERS.map((k,i)=>`<button class="st" data-k="${k.id}" style="left:${k.x}%;--r:${k.r}deg;--dy:${k.dy}" aria-label="${k.label}"><span class="tag">${k.label}</span>${k.mini}</button>`).join("")}
+    <div class="inside"><img src="${A}crate-back.webp" alt=""></div>
     <div class="box">${CHEST}</div>
    </div></div></div>
   <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebrivera@bu.edu">email</a> or my <a href="#" class="missing" title="calendly link needed" onclick="return false">calendly link</a>!</p></div>`,
@@ -413,13 +416,13 @@ const A='/new/p/';
 const IMG={travel:['passport.webp','a US passport'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a JBL L82 Classic speaker'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
- {id:'travel',label:'places',x:8,r:-9,dy:'0cqw',mini:pic('travel',96)},
- {id:'film',label:'photos',x:21,r:-6,dy:'-1cqw',mini:pic('film',150)},
- {id:'hifi',label:'listening',x:58,r:-2,dy:'0cqw',mini:pic('hifi',80)},
- {id:'coffee',label:'coffee',x:42,r:3,dy:'-1cqw',mini:pic('coffee',118)},
- {id:'tri',label:'training',x:68,r:6,dy:'0cqw',mini:pic('tri',128)}
+ {id:'travel',label:'places',x:10,r:-8,dy:'-3cqw',mini:pic('travel',108)},
+ {id:'film',label:'photos',x:23,r:-5,dy:'-10cqw',mini:pic('film',166)},
+ {id:'hifi',label:'listening',x:59,r:-2,dy:'0cqw',mini:pic('hifi',94)},
+ {id:'coffee',label:'coffee',x:43,r:3,dy:'0cqw',mini:pic('coffee',128)},
+ {id:'tri',label:'training',x:66,r:5,dy:'-4cqw',mini:pic('tri',148)}
 ];
-const CHEST=`<img src="${A}chest.webp" alt="">`;
+const CHEST=`<img src="${A}crate-front.webp" alt="">`;
 const BACK={
  travel:`<h4>Places</h4><dl><dt>favorite</dt><dd><span class="ph2">your favorite place and why</span></dd>
   <dt>next</dt><dd>New York on Nov 16, then London on Nov 19</dd>
