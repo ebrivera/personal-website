@@ -240,6 +240,23 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .legend{display:flex;gap:12px;font-size:12px}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
 .rows a{text-decoration:none}
+/* ---------- blog ---------- */
+.posts a{display:block}
+.posts .t span{white-space:nowrap}
+.sheet{background:#f6f2e7;color:#24382f;border-radius:10px;padding:40px 44px 46px;margin-top:4px;box-shadow:0 10px 30px rgba(0,0,0,.14)}
+.sheet .back{display:inline-block;font-size:13px;color:#54796d;text-decoration:none;margin-bottom:22px}
+.sheet .back:hover{text-decoration:underline}
+.sheet h1{font-size:25px;font-weight:600;line-height:1.2;letter-spacing:-.02em;max-width:24ch}
+.sheet .by{color:#5d6e62;font-size:13.5px;margin-top:8px}
+.sheet figure{margin:28px 0 30px}
+.sheet figure svg{display:block;width:100%;height:auto;border-radius:6px;background:#e9e3d2}
+.sheet figcaption{font-size:12.5px;color:#6c7a70;margin-top:8px}
+.sheet .body p{font-size:16px;line-height:1.72;max-width:62ch;margin-top:1.05em}
+.sheet .body p:first-child{margin-top:0}
+.sheet .end{margin-top:34px;padding-top:16px;border-top:1.5px dashed #c9c1ad;font-size:13px;color:#54796d;display:flex;justify-content:space-between;gap:12px}
+.sheet .end a{color:inherit}
+@media (max-width:820px){.sheet{padding:26px 20px 30px}.sheet h1{font-size:22px}.sheet .body p{font-size:15.5px}}
+
 .rows a:hover b{text-decoration:underline;text-decoration-color:var(--acc);text-underline-offset:3px}
 .missing{border-bottom:1px dashed var(--acc)}
 
@@ -263,6 +280,7 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
   <nav>
     <button data-p="about">about</button>
     <button data-p="projects">projects</button>
+    <button data-p="blog">blog</button>
   </nav>
 
   <div class="fold"><div>
@@ -288,9 +306,50 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
   </div>
 </footer>
 
+<template id="post-training-across-browser-tabs">
+<figure><svg viewBox="0 0 560 220" role="img" aria-label="Three browser tabs sending updates to a shared model">
+ <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#54796d"/></marker></defs>
+ <g font-family="Libre Franklin,sans-serif" font-size="11" fill="#24382f">
+  <g transform="translate(36,22)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 1 · layers 1–12</text></g>
+  <g transform="translate(36,86)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 2 · layers 13–24</text></g>
+  <g transform="translate(36,150)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 3 · layers 25–36</text></g>
+  <g stroke="#54796d" stroke-width="1.5" fill="none" marker-end="url(#ah)" stroke-dasharray="4 4">
+   <path d="M196 56C280 56 300 110 368 110"/><path d="M196 120H368"/><path d="M196 184C280 184 300 130 368 130"/>
+  </g>
+  <rect x="374" y="76" width="176" height="70" rx="8" fill="#54796d"/>
+  <text x="462" y="108" text-anchor="middle" fill="#f6f2e7" font-weight="600" font-size="13">shared model</text>
+  <text x="462" y="126" text-anchor="middle" fill="#efdca6" font-size="10">updates every few hundred steps</text>
+ </g></svg><figcaption>Three browser tabs sending updates to a shared model</figcaption></figure>
+<div class="body">
+<p>Compute is arguably the hardest thing to get your hands on right now. Especially as a college student, I didn’t have a budget to rent GPUs, and I wish I could say I had a couple of H100s to borrow. But from a project I was working on at the time, I realized we have GPUs all around us.</p>
+<p>GPUs are plentiful if you look in the right places. WebGL, and the modernized WebGPU, power Figma and Google Maps 3D view, along with many of the in-browser games you might have played after Flash was deprecated. That means almost every browser has access to GPU power, including your computer, your phone, and in some cases your smart TV. But for the most part, those machines sit idle for a good chunk of the day, if not most of it. That led me to a question I kept coming back to: what would it take to let these machines participate in training a serious model?</p>
+<p>At first, I was shocked nobody had done this. Connect enough machines, divide up the work, and train — it sounded fairly easy. In practice, almost every part of it is difficult.</p>
+<p>Your personal device does not behave like a machine in a datacenter, beyond the obvious reasons. Someone closes their laptop, a phone goes to sleep, or a network connection drops. Workers in this kind of network can appear or vanish at any moment, so there is no stable cluster you can reserve and expect to find unchanged when you get back.</p>
+<p>The hardware differs across the board as well. Your browser does not have access to CUDA, let alone 80GB of memory. The environment is far more constrained. The training path we found that actually held together was TensorFlow.js running on WebGL, which meant designing around small amounts of memory and FP32 compute.</p>
+<p>Then there is the model itself. A seriously sized transformer will not fit inside a single browser tab, so it has to be split across multiple devices. Activations move forward, gradients move backward, and the whole system has to stay busy while that traffic crosses commodity internet connections.</p>
+<p>That creates another problem. The obvious way to synchronize distributed training is also the easiest way to destroy a home network. Sending full gradients between every worker after every step simply moves too much data. Most of the optimization has to happen locally, and when machines do communicate, the updates have to be as small as possible.</p>
+<p>But the constraint I kept coming back to had nothing to do with training. It had to do with installation.</p>
+<p>In an ideal world, I could ask family and friends to join my network and help me train something. There are almost certainly more people willing to lend idle GPU time than there are people willing to install Python, configure CUDA, clone a repository, and work from a terminal. If contributing compute requires setup, most of those machines will never join.</p>
+<p>So the interface had to be a URL.</p>
+<p>While I was working on this, I reached out to the only person I knew who would be willing to tackle a problem this ridiculous: Ryan Rodriguez. Funnily enough, he was already thinking about the same problem, having watched the Mac mini frenzy sweep the world after the release of OpenClaw. Together, we built Swarm, a distributed training system that runs inside the browser.</p>
+<p>You open a tab. Your GPU becomes a worker. There is nothing to install.</p>
+<p>Swarm splits transformer layers across GPU-backed Chrome workers and trains them using 1F1B pipeline parallelism. Each stage runs locally through TensorFlow.js inside a Web Worker, while activations and gradients travel directly between peers over WebRTC.</p>
+<p>To keep communication from overwhelming the system, we use DiLoCo so that most optimization happens locally and workers synchronize only every few hundred steps. SparseLoCo compresses those updates further, reducing synchronization traffic by roughly 65x.</p>
+<p>Memory was another limiting factor. Gradient checkpointing cut activation memory by about 60%, and 8-bit Adam reduced optimizer-state memory by 4x. Together, those changes made it possible to train a model that could not fit inside any individual browser worker by spreading it across several of them instead.</p>
+<p>Eventually, we ran a 774M-parameter GPT-2 Large model across six Chrome workers distributed across three AWS regions.</p>
+<p>That experiment was the part that made the idea feel less hypothetical.</p>
+<p>Swarm is still very much a work in progress, and we would love to have more people contribute to it. The goal is not to prove that a collection of browser tabs can replace a well-run GPU cluster. Datacenters exist for good reasons.</p>
+<p>What interests me is the space on the other side of that.</p>
+<p>There is an enormous amount of compute sitting in machines that were never designed to be part of a training cluster, owned by people who will probably never SSH into a server. If participating becomes as simple as opening a webpage, that compute suddenly becomes available in a way it was not before.</p>
+<p>As the race to build better models continues, I suspect we will see more strange, improvised ways of finding and using compute.</p>
+<p>Swarm is one attempt to see how far one of those paths can go.</p>
+</div>
+</template>
+
 <script>
 const WORK=[["IBM","Software Developer","2026 – Present"],["Cantena","Founder","2025 – 26"],["Wayfair","Software Engineer Intern","2025"],["Whiting-Turner","Data Architecture Engineer","2024"],["MyTA","Founding Engineer","2023 – 24"]];
 const PROJ=[["Swarm","Browser-native distributed LLM training","https://tryswarm.dev/"],["Agent Checkout Proof","Is your website ready for Agents to pay?","https://isyouragentreadytopay.vercel.app/"],["Does Not Exist","LLM Planner + Diffusion Model = On Demand Website","https://dne-canvas-demo-production.up.railway.app/demo"],["OCR Digit Classifier","Draw a digit, can we figure it out?","https://github.com/ebrivera/knn-ocr"]];
+const POSTS=[{slug:"training-across-browser-tabs",title:"Training a language model across browser tabs",date:"August 19th 2026"}];
 const host=u=>u.replace(/^https?:\/\//,'').replace(/\/$/,'');
 const I={
  gh:'<svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>',
@@ -314,8 +373,14 @@ const PAGES={
   <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebrivera@bu.edu">email</a> or my <a href="#" class="missing" title="calendly link needed" onclick="return false">calendly link</a>!</p></div>`,
  projects:()=>`<h2>Projects</h2><p class="sub">things I've built</p>
   <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${p[0]} ↗</b><span>${host(p[2])}</span></div><p>${p[1]}</p></a></li>`).join("")}</ul>
-  <div class="sec"><p>Currently building in inference and RL, come back to see what I build!</p></div>`
+  <div class="sec"><p>Currently building in inference and RL, come back to see what I build!</p></div>`,
+ blog:()=>`<h2>Blog</h2><p class="sub">things I've written</p>
+  <ul class="rows posts">${POSTS.map(p=>`<li><a href="#blog/${p.slug}"><div class="t"><b>${p.title}</b><span>${p.date}</span></div></a></li>`).join("")}</ul>`
 };
+const post=slug=>{const p=POSTS.find(x=>x.slug===slug),t=document.getElementById('post-'+slug);return p&&t?`<article class="sheet"><a class="back" href="#blog">← all posts</a>
+  <h1>${p.title}</h1><p class="by">Ernesto Rivera · ${p.date}</p>${t.innerHTML}
+  <div class="end"><a href="#blog">← all posts</a></div></article>`:null};
+const view=h=>{if(!h)return null;const[a,b]=h.split('/');if(!PAGES[a])return null;if(!b)return PAGES[a];if(a==='blog'&&POSTS.some(x=>x.slug===b))return()=>post(b);return null};
 
 /* ---------- stickers ---------- */
 const C={ink:'#24382f',cream:'#f4efe3',kraft:'#c9a878',kraftD:'#a8875a',gold:'#efdca6',green:'#54796d',deep:'#2f4b40',red:'#c4553d'};
@@ -436,11 +501,11 @@ let cur=null;
 function go(p){
   if(openCard)openCard.close();
   const inner=$('#inner');
-  $$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  $$('nav button').forEach(b=>b.classList.toggle('on',!!p&&b.dataset.p===p.split('/')[0]));
   if(!p){document.body.classList.remove('open');cur=null;inner.classList.remove('show');try{history.replaceState(null,'',location.pathname)}catch(e){};return}
   const wasOpen=document.body.classList.contains('open');
   inner.classList.remove('show');
-  const swap=()=>{inner.innerHTML=PAGES[p]();$('#page').scrollTop=0;requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.add('show')))};
+  const swap=()=>{inner.innerHTML=view(p)();$('#page').scrollTop=0;requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.add('show')))};
   if(wasOpen&&cur!==p){setTimeout(swap,220)}else{swap()}
   document.body.classList.add('open');cur=p;
   try{history.replaceState(null,'','#'+p)}catch(e){}
@@ -448,8 +513,8 @@ function go(p){
 $$('nav button').forEach(b=>b.onclick=()=>go(cur===b.dataset.p?null:b.dataset.p));
 $('#home').onclick=()=>go(null);
 addEventListener('keydown',e=>{if(e.key==='Escape')go(null)});
-addEventListener('hashchange',()=>go(PAGES[location.hash.slice(1)]?location.hash.slice(1):null));
-if(PAGES[location.hash.slice(1)])go(location.hash.slice(1));
+addEventListener('hashchange',()=>go(view(location.hash.slice(1))?location.hash.slice(1):null));
+if(view(location.hash.slice(1)))go(location.hash.slice(1));
 
 // big album card
 (function(){
