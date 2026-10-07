@@ -27,7 +27,7 @@
    and the page slides in from the right, like rubylu.dev. Light only. */
 /* Chosen: Fenway green (#54796d) background, cream text, Libre Franklin. */
 :root{
-  --bg:#54796d; --panel:#4d7165; --ink:#f6f2e7; --muted:#d3ddd5; --faint:#a9bdb3; --line:#6c8c81; --acc:#efdca6;
+  --bg:#54796d; --panel:#4d7165; --barbg:#507569; --ink:#f6f2e7; --muted:#d3ddd5; --faint:#a9bdb3; --line:#6c8c81; --acc:#efdca6;
   --f:"Libre Franklin",Helvetica,Arial,sans-serif; --track:-.012em; --nametrack:-.025em;
   --colw:540px; --side:228px; --ease:cubic-bezier(.65,0,.2,1); --dur:.75s;
 }
@@ -121,7 +121,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .rows p{color:var(--muted);font-size:14px;margin-top:2px}
 
 /* ---------- toned-down spotify bar ---------- */
-.bar{position:fixed;left:0;right:0;bottom:0;height:56px;border-top:1px solid var(--line);background:var(--bg);
+.bar{position:fixed;left:0;right:0;bottom:0;height:56px;border-top:1px solid var(--line);background:var(--barbg);
   display:grid;grid-template-columns:1fr minmax(160px,340px) 1fr;align-items:center;padding:0 20px;gap:20px;font-size:13px;z-index:3}
 .np{display:flex;align-items:center;gap:11px;min-width:0}
 .bar{position:fixed}
@@ -141,13 +141,13 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .src .lbl{margin-right:6px}
 .qbtn{border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink);font-size:12.5px;transition:border-color .2s,background .2s}
 .qbtn:hover,.qbtn[aria-expanded=true]{border-color:var(--acc)}
-.qpop{position:absolute;right:16px;bottom:64px;width:320px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;
+.qpop{position:absolute;right:16px;bottom:64px;width:320px;background:var(--barbg);border:1px solid var(--line);border-radius:10px;padding:14px;
   box-shadow:0 12px 32px -12px rgba(0,0,0,.25);animation:pop .25s var(--ease)}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}}
 /* click the album art: the player grows into a card, any other interaction shrinks it back */
 .np .art{cursor:zoom-in;transition:transform .2s var(--ease)}
 .np .art:hover{transform:scale(1.06)}
-.npbig{position:absolute;left:16px;bottom:64px;width:min(300px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;
+.npbig{position:absolute;left:16px;bottom:64px;width:min(300px,calc(100vw - 32px));background:var(--barbg);border:1px solid var(--line);border-radius:12px;padding:12px;
   box-shadow:0 18px 40px -14px rgba(0,0,0,.35);transform-origin:bottom left;animation:grow .4s var(--ease)}
 .npbig.out{animation:shrink .25s var(--ease) forwards}
 @keyframes grow{from{opacity:0;transform:scale(.15)}}
