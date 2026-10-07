@@ -60,12 +60,15 @@ body.open .fold{grid-template-rows:0fr;opacity:0;margin:0!important}
 .where{font-size:14.5px}
 
 nav{display:flex;gap:22px;margin-top:28px;font-size:15px;position:relative}
-body.open nav{flex-direction:column;align-items:flex-start;gap:6px;margin-top:30px}
-nav button{color:var(--muted);padding:2px 0;position:relative;transition:color .25s;text-align:left}
-nav button:hover{color:var(--ink)}
-nav button.on{color:var(--ink)}
-nav button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
-nav button.on::after,nav button:hover::after{transform:scaleX(1)}
+body.open nav{flex-direction:column;align-items:flex-start;gap:8px;margin-top:30px}
+nav{gap:10px}
+nav button{color:var(--ink);font-weight:500;padding:5px 15px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:999px;transition:background .25s,color .25s,border-color .25s;text-align:left}
+nav button:hover{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent)}
+nav button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+nav button::after{content:" →";opacity:.6}
+nav button.on::after,nav .home::after{content:""}
+nav .home{display:none;color:var(--acc);border-color:color-mix(in srgb,var(--acc) 55%,transparent)}
+body.open nav .home{display:inline-block}
 
 .exp{margin-top:30px;list-style:none;border-top:1px solid var(--line)}
 .exp li{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
@@ -175,7 +178,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
   .col{position:relative;left:auto!important;width:auto!important;margin:0 16px;padding:72px 0 90px;bottom:auto;min-height:calc(100vh - 56px)}
   body.open .col{min-height:0;padding:56px 0 12px}
   body.open .contact{margin-top:16px}
-  body.open nav{flex-direction:row;gap:22px;margin-top:16px}
+  body.open nav{flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:16px}
   .page{left:0;top:auto;bottom:auto;position:relative;transform:none;display:none;border-left:0;border-top:1px solid var(--line)}
   body.open .page{display:block}
   .inner{padding:36px 16px 90px}
@@ -193,8 +196,8 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 /* ---------- show and tell: the toy chest ---------- */
 .hint{color:var(--faint);font-size:13px;margin:-6px 0 14px}
 .chestwrap{max-width:560px;container-type:inline-size;margin-top:54px}
-.chest{position:relative;width:100%;aspect-ratio:560/250}
-.chest .st{position:absolute;bottom:38%;border:0;padding:0;background:none;cursor:pointer;
+.chest{position:relative;width:100%;aspect-ratio:560/392}
+.chest .st{position:absolute;bottom:59%;border:0;padding:0;background:none;cursor:pointer;
   transform:translateY(var(--dy,0)) rotate(var(--r,0deg));transform-origin:50% 100%;
   transition:transform .45s var(--ease),filter .3s;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));z-index:1}
 .chest .st:hover,.chest .st:focus-visible{transform:translateY(calc(var(--dy,0px) - 7cqw)) rotate(calc(var(--r,0deg) * .4))}
@@ -202,10 +205,9 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .chest .st svg,.chest .st img{display:block;max-width:none}
 .chest .st .tag{position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:11.5px;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .25s}
 .chest .st:hover .tag,.chest .st:focus-visible .tag{opacity:1}
-.chest .box{position:absolute;left:0;right:0;bottom:0;height:47.2%;z-index:2;pointer-events:none}
-.chest .box svg{width:100%;height:100%;display:block}
+.chest .box{position:absolute;left:10%;right:10%;bottom:0;z-index:2;pointer-events:none}
+.chest .box img{width:100%;display:block;filter:drop-shadow(0 14px 18px rgba(0,0,0,.28))}
 .recv{border-radius:6px}
-.mxflag{position:absolute;left:70%;bottom:44%;width:calc(112cqw / 5.6);z-index:0;pointer-events:none;transform:rotate(3deg);transform-origin:0 100%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
 .fly{position:fixed;z-index:22;margin:0;pointer-events:none;max-width:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));will-change:transform}
 
 .scrim{position:fixed;inset:0 0 56px 0;background:color-mix(in srgb,var(--bg) 72%,transparent);opacity:0;transition:opacity .4s;z-index:20;pointer-events:none}
@@ -272,6 +274,7 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
   </div></div>
 
   <nav>
+    <button class="home" id="homenav">← home</button>
     <button data-p="about">about</button>
     <button data-p="projects">projects</button>
     <button data-p="blog">blog</button>
@@ -360,7 +363,6 @@ const PAGES={
   <p><span class="ph">the expanded about, coming from you</span></p>
   <div class="sec"><h3>Show and tell</h3><p class="hint">pull something out of the chest</p>
    <div class="chestwrap"><div class="chest" id="chest">
-    <img class="mxflag" src="${A}flag.webp" alt="Mexican flag">
     ${STICKERS.map((k,i)=>`<button class="st" data-k="${k.id}" style="left:${k.x}%;--r:${k.r}deg;--dy:${k.dy}" aria-label="${k.label}"><span class="tag">${k.label}</span>${k.mini}</button>`).join("")}
     <div class="box">${CHEST}</div>
    </div></div></div>
@@ -407,31 +409,27 @@ const SVG={
  receiver:(w)=>`<img class="recv" style="width:${w}px" src="p/receiver.jpg" alt="vintage stereo receiver">`
 };
 const A='/new/p/';
-const IMG={travel:['scroll.webp','a rolled up travel log'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a pair of JBL L82 Classic speakers'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
+const IMG={travel:['passport.webp','a US passport'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a JBL L82 Classic speaker'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
- {id:'travel',label:'places',x:5,r:-4,dy:'1cqw',mini:pic('travel',60)},
- {id:'film',label:'photos',x:17,r:-8,dy:'-2cqw',mini:pic('film',138)},
- {id:'hifi',label:'listening',x:50,r:-2,dy:'-2cqw',mini:pic('hifi',120)},
- {id:'coffee',label:'coffee',x:36,r:3,dy:'-3cqw',mini:pic('coffee',112)},
- {id:'tri',label:'training',x:75,r:6,dy:'-1cqw',mini:pic('tri',118)}
+ {id:'travel',label:'places',x:9,r:-9,dy:'0cqw',mini:pic('travel',96)},
+ {id:'film',label:'photos',x:21,r:-6,dy:'-1cqw',mini:pic('film',150)},
+ {id:'hifi',label:'listening',x:57,r:-2,dy:'0cqw',mini:pic('hifi',80)},
+ {id:'coffee',label:'coffee',x:41,r:3,dy:'-1cqw',mini:pic('coffee',118)},
+ {id:'tri',label:'training',x:66,r:6,dy:'0cqw',mini:pic('tri',128)}
 ];
-const CHEST=`<svg viewBox="0 0 560 118" preserveAspectRatio="none"><rect x="0" y="0" width="560" height="16" rx="4" fill="#5b3a22"/>
- <rect x="8" y="14" width="544" height="104" rx="6" fill="#7a5032"/>
- <path d="M8 48h544M8 84h544" stroke="#64412a" stroke-width="2"/>
- <path d="M40 14v104M520 14v104" stroke="#64412a" stroke-width="2" opacity=".6"/>
- <rect x="262" y="26" width="36" height="30" rx="4" fill="#c9a44e"/><circle cx="280" cy="42" r="4" fill="#5b3a22"/></svg>`;
+const CHEST=`<img src="${A}chest.webp" alt="">`;
 const BACK={
  travel:`<h4>Places</h4><dl><dt>favorite</dt><dd><span class="ph2">your favorite place and why</span></dd>
   <dt>next</dt><dd>New York on Nov 16, then London on Nov 19</dd>
   <dt>pinned</dt><dd>California, Boston, New York, London, Paris</dd></dl>
-  <p class="credit">Scroll made from "Travel log texture" by Mary Vican, CC BY 2.0</p>`,
+  <p class="credit">Photo: US passport by ajay_suresh, CC BY 2.0</p>`,
  coffee:`<h4>Coffee in rotation</h4><dl><dt>beans</dt><dd>Equator, Mexico</dd><dt>machine</dt><dd>Breville Bambino Plus</dd>
   <dt>eyeing</dt><dd>a grinder upgrade, Opus 2 or Turin DF54</dd><dt>setup</dt><dd><span class="ph2">links to your setup</span></dd></dl>
   <p class="credit">Bag: Tigerwalk Espresso, product photo from Equator Coffees</p>`,
  hifi:`<h4>What I listen on</h4><dl><dt>speakers</dt><dd>ELAC towers</dd><dt>amp</dt><dd>WiiM</dd><dt>dream</dt><dd>JBL L82</dd>
   <dt>note</dt><dd><span class="ph2">a line about your setup or a record to try</span></dd></dl>
-  <p class="credit">Speakers: JBL L82 Classic MkII, product photo from JBL via Peter Tyson</p>`,
+  <p class="credit">Speaker: JBL L82 Classic MkII, product photo from JBL via Peter Tyson</p>`,
  tri:`<h4>Training</h4><dl><dt>race</dt><dd>Santa Cruz City Tri, Olympic distance</dd><dt>distance</dt><dd>1.5 km swim, 40 km bike, 10 km run</dd>
   <dt>why</dt><dd><span class="ph2">why you race, or your goal time</span></dd></dl>
   <p class="credit">Bib: Wharf to Wharf 2012 by fogcat5, CC BY-SA 2.0</p>`,
@@ -489,13 +487,17 @@ function openSticker(btn){
   setTimeout(()=>card.querySelector('[data-a=flip]').focus({preventScroll:true}),660);
 }
 document.addEventListener('click',e=>{const b=e.target.closest('.chest .st');if(b)openSticker(b)});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=null;
+  setInterval(()=>{if(openCard||document.hidden)return;const all=$$('.chest .st:not(.out)').filter(b=>b!==last&&!b.matches(':hover'));if(!all.length)return;
+    const b=all[Math.floor(Math.random()*all.length)];last=b;
+    b.animate([{translate:'0 0'},{translate:'0 -14px',offset:.35},{translate:'0 0',offset:.7},{translate:'0 -4px',offset:.85},{translate:'0 0'}],{duration:700,easing:'ease-out'})},2600)}
 addEventListener('keydown',e=>{if(e.key==='Escape'&&openCard){e.stopImmediatePropagation();openCard.close()}},true);
 
 let cur=null;
 function go(p){
   if(openCard)openCard.close();
   const inner=$('#inner');
-  $$('nav button').forEach(b=>b.classList.toggle('on',!!p&&b.dataset.p===p.split('/')[0]));
+  $$('nav button[data-p]').forEach(b=>b.classList.toggle('on',!!p&&b.dataset.p===p.split('/')[0]));
   if(!p){document.body.classList.remove('open');cur=null;inner.classList.remove('show');try{history.replaceState(null,'',location.pathname)}catch(e){};return}
   const wasOpen=document.body.classList.contains('open');
   inner.classList.remove('show');
@@ -504,7 +506,8 @@ function go(p){
   document.body.classList.add('open');cur=p;
   try{history.replaceState(null,'','#'+p)}catch(e){}
 }
-$$('nav button').forEach(b=>b.onclick=()=>go(cur===b.dataset.p?null:b.dataset.p));
+$$('nav button[data-p]').forEach(b=>b.onclick=()=>go(cur===b.dataset.p?null:b.dataset.p));
+$('#homenav').onclick=()=>go(null);
 $('#home').onclick=()=>go(null);
 addEventListener('keydown',e=>{if(e.key==='Escape')go(null)});
 addEventListener('hashchange',()=>go(view(location.hash.slice(1))?location.hash.slice(1):null));
