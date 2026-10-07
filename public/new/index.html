@@ -148,7 +148,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .qpop input::placeholder{color:var(--faint)}
 #qres{list-style:none;margin:6px 0 10px;max-height:180px;overflow:auto}
 #qres li{display:flex;align-items:center;gap:10px;padding:6px 4px;border-radius:5px;cursor:pointer;font-size:13px}
-#qres li:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+#qres li[data-i]:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 #qres .c{width:28px;height:28px;border-radius:3px;flex:none}
 #qres b{font-weight:500;display:block;line-height:1.2}
 #qres span{color:var(--muted);font-size:12px}
@@ -268,7 +268,6 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
     <input id="qin" placeholder="search a song or artist" autocomplete="off">
     <ul id="qres"></ul>
     <input id="qname" placeholder="your name (optional)" maxlength="30">
-    <div class="qfoot">one song per visitor per hour</div>
   </div>
 </footer>
 
@@ -509,8 +508,7 @@ $('#pi').style.width=(t/L*100)+'%';
         let u=$('.upnext');if(!u){u=document.createElement('span');u.className='upnext';$('.np .t').after(u)}
         u.textContent='up next: '+t.title+(who?' · from '+who:' · from a visitor');
         qbtn.textContent='queued ✓';setTimeout(()=>{close();qbtn.textContent='+ add to my queue'},1800);return}
-      const msg=d.error==='rate_limited'?`you already added one. try again in ${d.retryInMin} min`
-        :d.error==='not_listening'?"I'm not listening right now, so there's no queue to add to. try again later"
+      const msg=d.error==='not_listening'?"I'm not listening right now, so there's no queue to add to. try again later"
         :"that didn't go through, try again in a bit";
       qres.innerHTML=`<li class="done">${msg}</li>`;
     }
