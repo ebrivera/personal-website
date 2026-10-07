@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { api, isConfigured } from "@/lib/spotify";
+import { rememberAdd } from "@/lib/visitorAdds";
 
 export const dynamic = "force-dynamic";
 
@@ -14,5 +15,7 @@ export async function POST(req: NextRequest) {
   if (res.status === 404) return NextResponse.json({ error: "not_listening" }, { status: 409 });
   if (!res.ok) return NextResponse.json({ error: "spotify_error" }, { status: 502 });
 
+  const name = typeof body?.name === "string" ? body.name.replace(/[<>&"']/g, "").trim().slice(0, 40) : "";
+  await rememberAdd(uri, name);
   return NextResponse.json({ ok: true });
 }

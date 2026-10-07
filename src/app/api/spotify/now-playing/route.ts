@@ -1,5 +1,20 @@
 import { NextResponse } from "next/server";
 import { api, isConfigured, slimTrack } from "@/lib/spotify";
+import { whoAdded } from "@/lib/visitorAdds";
+
+// The next few songs in the queue, each tagged with the visitor who added it (or null).
+async function upNext() {
+  try {
+    const res = await api("/me/player/queue");
+    if (!res.ok) return [];
+    const data = await res.json();
+    const tracks = (data?.queue ?? []).filter((t: { type?: string }) => t?.type === "track").slice(0, 3).map(slimTrack);
+    const names = await whoAdded(tracks.map((t: { uri: string }) => t.uri));
+    return tracks.map((t: ReturnType<typeof slimTrack>, i: number) => ({ ...t, from: names[i] ?? null }));
+  } catch {
+    return [];
+  }
+}
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +28,13 @@ export async function GET() {
       const data = await now.json();
       if (data?.item && data.currently_playing_type === "track")
         return NextResponse.json(
-          { configured: true, playing: data.is_playing, progressMs: data.progress_ms, track: slimTrack(data.item) },
+          {
+            configured: true,
+            playing: data.is_playing,
+            progressMs: data.progress_ms,
+            track: slimTrack(data.item),
+            upNext: data.is_playing ? await upNext() : [],
+          },
           { headers },
         );
     }
