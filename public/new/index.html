@@ -141,6 +141,18 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .qpop{position:absolute;right:16px;bottom:64px;width:320px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;
   box-shadow:0 12px 32px -12px rgba(0,0,0,.25);animation:pop .25s var(--ease)}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}}
+/* click the album art: the player grows into a card, any other interaction shrinks it back */
+.np .art{cursor:zoom-in;transition:transform .2s var(--ease)}
+.np .art:hover{transform:scale(1.06)}
+.npbig{position:absolute;left:16px;bottom:64px;width:min(300px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;
+  box-shadow:0 18px 40px -14px rgba(0,0,0,.35);transform-origin:bottom left;animation:grow .4s var(--ease)}
+.npbig.out{animation:shrink .25s var(--ease) forwards}
+@keyframes grow{from{opacity:0;transform:scale(.15)}}
+@keyframes shrink{to{opacity:0;transform:scale(.15)}}
+.bigart{aspect-ratio:1;border-radius:6px;background-size:cover;background-position:center}
+.npbig .bt{margin-top:10px;font-size:14px;line-height:1.35}
+.npbig .bt b{font-weight:500;display:block}
+.npbig .bt span{color:var(--muted)}
 .qhead{font-weight:500;font-size:13.5px;display:flex;flex-direction:column;margin-bottom:10px}
 .qhead span{font-weight:400;color:var(--muted);font-size:12.5px}
 .qpop input{width:100%;font:inherit;font-size:13.5px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:6px;padding:7px 9px;outline:none}
@@ -265,6 +277,7 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
   <div class="np"><div class="art"></div><div class="t"><b>I Wasn't There</b><span>Kevin Abstract, Derby</span></div></div>
   <div class="prog"><span id="t0">0:00</span><div class="track"><i id="pi"></i></div><span id="tL">3:12</span></div>
   <div class="src"><span class="eq"><i></i><i></i><i></i></span><span class="lbl" id="lbl">on Spotify</span><button class="qbtn" id="qbtn" aria-expanded="false">+ add to my queue</button></div>
+  <div class="npbig" id="npbig" hidden><div class="bigart"></div><div class="bt"></div></div>
   <div class="qpop" id="qpop" hidden>
     <div class="qhead">Put something in my queue<span>I'll hear it after this song</span></div>
     <input id="qin" placeholder="search a song or artist" autocomplete="off">
@@ -436,6 +449,25 @@ addEventListener('keydown',e=>{if(e.key==='Escape')go(null)});
 addEventListener('hashchange',()=>go(PAGES[location.hash.slice(1)]?location.hash.slice(1):null));
 if(PAGES[location.hash.slice(1)])go(location.hash.slice(1));
 
+// big album card
+(function(){
+  const big=$('#npbig'),art=$('.np .art');
+  function open(){
+    const lg=art.dataset.lg;
+    big.querySelector('.bigart').style.background=lg?`center/cover url('${lg}')`:getComputedStyle(art).background;
+    big.querySelector('.bt').innerHTML=$('.np .t').innerHTML;
+    big.classList.remove('out');big.hidden=false;
+    setTimeout(()=>{['click','wheel','touchmove','keydown','scroll'].forEach(e=>addEventListener(e,close,{capture:true,passive:true}))},0);
+  }
+  function close(e){
+    if(e&&e.type==='click'&&e.target.closest&&e.target.closest('#npbig a'))return setTimeout(close,0);
+    if(e&&e.type==='click'&&art.contains(e.target))e.stopPropagation();
+    ['click','wheel','touchmove','keydown','scroll'].forEach(e=>removeEventListener(e,close,{capture:true}));
+    big.classList.add('out');setTimeout(()=>{if(big.classList.contains('out'))big.hidden=true},250);
+  }
+  art.onclick=e=>{if(big.hidden||big.classList.contains('out')){e.stopPropagation();open()}};
+})();
+
 // add to queue (mock: a real version calls a small API route that adds to Spotify)
 const SONGS=[["Pink + White","Frank Ocean","#e2b6b0"],["Nights","Frank Ocean","#b9a27d"],["Self Control","Frank Ocean","#8a9c8b"],["Anita","Smino","#b0603a"],["Netflix & Dill","Smino","#7a6a3a"],["Annie","Dijon","#6b7a5a"],["Talk Down","Dijon","#55604a"],["Cariño","The Marías","#a3384a"],["Hush","The Marías","#7a2d3a"],["Good News","Mac Miller","#3f5d7a"],["Ladders","Mac Miller","#5f7b8e"],["Weird Fishes","Radiohead","#3a5a6a"],["Ivy","Frank Ocean","#a7b38c"],["Redbone","Childish Gambino","#a0402e"]];
 const qpop=$('#qpop'),qin=$('#qin'),qres=$('#qres'),qbtn=$('#qbtn');
@@ -477,7 +509,7 @@ $('#pi').style.width=(t/L*100)+'%';
   function apply(d){
     np=d;base=d.progressMs||0;stamp=Date.now();const t=d.track;
     $('.np .t').innerHTML=`<b><a href="${esc(t.url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(t.title)}</a></b><span>${esc(t.artist)}</span>`;
-    $('.np .art').style.background=cover(t);
+    $('.np .art').style.background=cover(t);$('.np .art').dataset.lg=t.artLg?esc(t.artLg):'';
     $('#lbl').textContent=d.playing?'on Spotify':(d.playedAt?'last played '+ago(d.playedAt):'last played');
     $('.eq').style.visibility=d.playing?'visible':'hidden';
     $('.qhead span').textContent=d.playing?"I'll hear it after this song":"it plays next time I'm listening";

@@ -66,6 +66,7 @@ export const slimTrack = (t: SpotifyTrack) => ({
   artist: t.artists.map((a) => a.name).join(", "),
   album: t.album.name,
   art: [...t.album.images].sort((a, b) => a.width - b.width).find((i) => i.width >= 64)?.url ?? t.album.images[0]?.url ?? null,
+  artLg: [...t.album.images].sort((a, b) => b.width - a.width)[0]?.url ?? null,
   url: t.external_urls.spotify,
   uri: t.uri,
   durationMs: t.duration_ms,
