@@ -526,8 +526,8 @@ $('#pi').style.width=(t/L*100)+'%';
     const q=$('#qup');q.hidden=!list.length;
     q.innerHTML=list.length?'coming up'+list.map(x=>`<div><b>${esc(x.title)}</b> ${esc(x.artist)}${from(x)}</div>`).join(''):'';
   }
-  async function poll(){
-    try{const r=await fetch('/api/spotify/now-playing',{cache:'no-store'});if(!r.ok)return false;
+  async function poll(fresh){
+    try{const r=await fetch('/api/spotify/now-playing'+(fresh?'?t='+Date.now():''),{cache:'no-store'});if(!r.ok)return false;
       const d=await r.json();if(!d.configured||!d.track)return false;apply(d);return true}catch(e){return false}
   }
   poll().then(ok=>{
@@ -550,15 +550,15 @@ $('#pi').style.width=(t/L*100)+'%';
       let r=null,d={};
       try{r=await fetch('/api/spotify/queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({uri:t.uri,name:who})});d=await r.json().catch(()=>({}))}catch(e){}
       if(r&&r.ok){
-        qres.innerHTML=`<li class="done"><span class="c" style="background:${cover(t)}"></span><div><b>Queued: ${esc(t.title)}</b><span>thanks${who?', '+who:''}. it plays after this one</span></div></li>`;
-        let u=$('.upnext');if(!u){u=document.createElement('span');u.className='upnext';$('.np .t').after(u)}
-        u.textContent='up next: '+t.title+(who?' · from '+who:' · from a visitor');
+        qres.innerHTML=`<li class="done"><span class="c" style="background:${cover(t)}"></span><div><b>Queued: ${esc(t.title)}</b><span>thanks${who?', '+who:''}. it's in the queue</span></div></li>`;
+        // refresh the bar and the "coming up" list from Spotify instead of guessing where the song landed
+        setTimeout(()=>poll(true),700);setTimeout(()=>poll(true),3000);
         qbtn.textContent='queued ✓';setTimeout(()=>{close();qbtn.textContent='+ add to my queue'},1800);return}
       const msg=d.error==='not_listening'?"I'm not listening right now, so there's no queue to add to. try again later"
         :"that didn't go through, try again in a bit";
       qres.innerHTML=`<li class="done">${msg}</li>`;
     }
-    const open=()=>{qpop.hidden=false;qbtn.setAttribute('aria-expanded',true);qin.value='';qres.innerHTML=hint;qin.focus()};
+    const open=()=>{poll(true);qpop.hidden=false;qbtn.setAttribute('aria-expanded',true);qin.value='';qres.innerHTML=hint;qin.focus()};
     const close=()=>{qpop.hidden=true;qbtn.setAttribute('aria-expanded',false)};
     let deb;qin.oninput=()=>{clearTimeout(deb);deb=setTimeout(search,250)};
     qbtn.onclick=()=>qpop.hidden?open():close();
