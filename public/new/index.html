@@ -243,19 +243,13 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 /* ---------- blog ---------- */
 .posts a{display:block}
 .posts .t span{white-space:nowrap}
-.sheet{background:#f6f2e7;color:#24382f;border-radius:10px;padding:40px 44px 46px;margin-top:4px;box-shadow:0 10px 30px rgba(0,0,0,.14)}
-.sheet .back{display:inline-block;font-size:13px;color:#54796d;text-decoration:none;margin-bottom:22px}
-.sheet .back:hover{text-decoration:underline}
-.sheet h1{font-size:25px;font-weight:600;line-height:1.2;letter-spacing:-.02em;max-width:24ch}
-.sheet .by{color:#5d6e62;font-size:13.5px;margin-top:8px}
-.sheet figure{margin:28px 0 30px}
-.sheet figure svg{display:block;width:100%;height:auto;border-radius:6px;background:#e9e3d2}
-.sheet figcaption{font-size:12.5px;color:#6c7a70;margin-top:8px}
-.sheet .body p{font-size:16px;line-height:1.72;max-width:62ch;margin-top:1.05em}
-.sheet .body p:first-child{margin-top:0}
-.sheet .end{margin-top:34px;padding-top:16px;border-top:1.5px dashed #c9c1ad;font-size:13px;color:#54796d;display:flex;justify-content:space-between;gap:12px}
-.sheet .end a{color:inherit}
-@media (max-width:820px){.sheet{padding:26px 20px 30px}.sheet h1{font-size:22px}.sheet .body p{font-size:15.5px}}
+.post figure{margin:6px 0 30px}
+.post figure svg{display:block;width:100%;height:auto;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.post figcaption{font-size:12.5px;color:var(--faint);margin-top:8px}
+.post .body p{margin-top:1.05em;line-height:1.7}
+.post .body p:first-child{margin-top:0}
+.post .back{color:var(--muted);font-size:14px;text-decoration:none}
+.post .back:hover{color:var(--acc)}
 
 .rows a:hover b{text-decoration:underline;text-decoration-color:var(--acc);text-underline-offset:3px}
 .missing{border-bottom:1px dashed var(--acc)}
@@ -308,17 +302,17 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
 
 <template id="post-training-across-browser-tabs">
 <figure><svg viewBox="0 0 560 220" role="img" aria-label="Three browser tabs sending updates to a shared model">
- <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#54796d"/></marker></defs>
- <g font-family="Libre Franklin,sans-serif" font-size="11" fill="#24382f">
-  <g transform="translate(36,22)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 1 · layers 1–12</text></g>
-  <g transform="translate(36,86)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 2 · layers 13–24</text></g>
-  <g transform="translate(36,150)"><path d="M0 14h150v40H0z" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#f6f2e7" stroke="#54796d" stroke-width="1.5"/><text x="12" y="39">tab 3 · layers 25–36</text></g>
-  <g stroke="#54796d" stroke-width="1.5" fill="none" marker-end="url(#ah)" stroke-dasharray="4 4">
+ <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#efdca6"/></marker></defs>
+ <g font-family="Libre Franklin,sans-serif" font-size="11" fill="#f6f2e7">
+  <g transform="translate(36,22)"><path d="M0 14h150v40H0z" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><text x="12" y="39">tab 1 · layers 1–12</text></g>
+  <g transform="translate(36,86)"><path d="M0 14h150v40H0z" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><text x="12" y="39">tab 2 · layers 13–24</text></g>
+  <g transform="translate(36,150)"><path d="M0 14h150v40H0z" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><path d="M0 14V6a6 6 0 0 1 6-6h58a6 6 0 0 1 6 6v8" fill="#4d7165" stroke="#d3ddd5" stroke-width="1.5"/><text x="12" y="39">tab 3 · layers 25–36</text></g>
+  <g stroke="#efdca6" stroke-width="1.5" fill="none" marker-end="url(#ah)" stroke-dasharray="4 4">
    <path d="M196 56C280 56 300 110 368 110"/><path d="M196 120H368"/><path d="M196 184C280 184 300 130 368 130"/>
   </g>
-  <rect x="374" y="76" width="176" height="70" rx="8" fill="#54796d"/>
-  <text x="462" y="108" text-anchor="middle" fill="#f6f2e7" font-weight="600" font-size="13">shared model</text>
-  <text x="462" y="126" text-anchor="middle" fill="#efdca6" font-size="10">updates every few hundred steps</text>
+  <rect x="374" y="76" width="176" height="70" rx="8" fill="#efdca6"/>
+  <text x="462" y="108" text-anchor="middle" fill="#24382f" font-weight="600" font-size="13">shared model</text>
+  <text x="462" y="126" text-anchor="middle" fill="#2f4b40" font-size="10">updates every few hundred steps</text>
  </g></svg><figcaption>Three browser tabs sending updates to a shared model</figcaption></figure>
 <div class="body">
 <p>Compute is arguably the hardest thing to get your hands on right now. Especially as a college student, I didn’t have a budget to rent GPUs, and I wish I could say I had a couple of H100s to borrow. But from a project I was working on at the time, I realized we have GPUs all around us.</p>
@@ -377,9 +371,9 @@ const PAGES={
  blog:()=>`<h2>Blog</h2><p class="sub">things I've written</p>
   <ul class="rows posts">${POSTS.map(p=>`<li><a href="#blog/${p.slug}"><div class="t"><b>${p.title}</b><span>${p.date}</span></div></a></li>`).join("")}</ul>`
 };
-const post=slug=>{const p=POSTS.find(x=>x.slug===slug),t=document.getElementById('post-'+slug);return p&&t?`<article class="sheet"><a class="back" href="#blog">← all posts</a>
-  <h1>${p.title}</h1><p class="by">Ernesto Rivera · ${p.date}</p>${t.innerHTML}
-  <div class="end"><a href="#blog">← all posts</a></div></article>`:null};
+const post=slug=>{const p=POSTS.find(x=>x.slug===slug),t=document.getElementById('post-'+slug);return p&&t?`<h2>${p.title}</h2><p class="sub">Ernesto Rivera · ${p.date}</p>
+  <div class="post">${t.innerHTML}</div>
+  <div class="sec post"><a class="back" href="#blog">← all posts</a></div>`:null};
 const view=h=>{if(!h)return null;const[a,b]=h.split('/');if(!PAGES[a])return null;if(!b)return PAGES[a];if(a==='blog'&&POSTS.some(x=>x.slug===b))return()=>post(b);return null};
 
 /* ---------- stickers ---------- */
