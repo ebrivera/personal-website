@@ -163,7 +163,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 @media (max-height:820px) and (min-width:821px){.col{padding:24px 0}.blurb{margin-top:14px}.blurb{font-size:14.5px;line-height:1.5}nav{margin-top:18px}.exp{margin-top:18px}.exp li{padding:7px 0}.contact{margin-top:18px}}
 /* ---------- show and tell: the toy chest ---------- */
 .hint{color:var(--faint);font-size:13px;margin:-6px 0 14px}
-.chestwrap{max-width:560px;container-type:inline-size;margin-top:34px}
+.chestwrap{max-width:560px;container-type:inline-size;margin-top:54px}
 .chest{position:relative;width:100%;aspect-ratio:560/250}
 .chest .st{position:absolute;bottom:38%;border:0;padding:0;background:none;cursor:pointer;
   transform:translateY(var(--dy,0)) rotate(var(--r,0deg));transform-origin:50% 100%;
@@ -176,6 +176,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .chest .box{position:absolute;left:0;right:0;bottom:0;height:47.2%;z-index:2;pointer-events:none}
 .chest .box svg{width:100%;height:100%;display:block}
 .recv{border-radius:6px}
+.mxflag{position:absolute;left:70%;bottom:44%;width:calc(112cqw / 5.6);z-index:0;pointer-events:none;transform:rotate(3deg);transform-origin:0 100%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
 .fly{position:fixed;z-index:22;margin:0;pointer-events:none;max-width:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));will-change:transform}
 
 .scrim{position:fixed;inset:0 0 56px 0;background:color-mix(in srgb,var(--bg) 72%,transparent);opacity:0;transition:opacity .4s;z-index:20;pointer-events:none}
@@ -275,6 +276,7 @@ const PAGES={
   <p><span class="ph">the expanded about, coming from you</span></p>
   <div class="sec"><h3>Show and tell</h3><p class="hint">pull something out of the chest</p>
    <div class="chestwrap"><div class="chest" id="chest">
+    <img class="mxflag" src="${A}flag.webp" alt="Mexican flag">
     ${STICKERS.map((k,i)=>`<button class="st" data-k="${k.id}" style="left:${k.x}%;--r:${k.r}deg;--dy:${k.dy}" aria-label="${k.label}"><span class="tag">${k.label}</span>${k.mini}</button>`).join("")}
     <div class="box">${CHEST}</div>
    </div></div></div>
@@ -315,14 +317,14 @@ const SVG={
  receiver:(w)=>`<img class="recv" style="width:${w}px" src="p/receiver.jpg" alt="vintage stereo receiver">`
 };
 const A='p/';
-const IMG={travel:['scroll.webp','a rolled up travel log'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['receiver.webp','1978 Sansui G-6000 stereo receiver'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
+const IMG={travel:['scroll.webp','a rolled up travel log'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a pair of JBL L82 Classic speakers'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
  {id:'travel',label:'places',x:5,r:-4,dy:'1cqw',mini:pic('travel',60)},
  {id:'film',label:'photos',x:17,r:-8,dy:'-2cqw',mini:pic('film',138)},
- {id:'hifi',label:'listening',x:47,r:-2,dy:'-5cqw',mini:pic('hifi',156)},
+ {id:'hifi',label:'listening',x:50,r:-2,dy:'-2cqw',mini:pic('hifi',120)},
  {id:'coffee',label:'coffee',x:36,r:3,dy:'-3cqw',mini:pic('coffee',112)},
- {id:'tri',label:'training',x:74,r:6,dy:'-1cqw',mini:pic('tri',118)}
+ {id:'tri',label:'training',x:75,r:6,dy:'-1cqw',mini:pic('tri',118)}
 ];
 const CHEST=`<svg viewBox="0 0 560 118" preserveAspectRatio="none"><rect x="0" y="0" width="560" height="16" rx="4" fill="#5b3a22"/>
  <rect x="8" y="14" width="544" height="104" rx="6" fill="#7a5032"/>
@@ -339,7 +341,7 @@ const BACK={
   <p class="credit">Bag: Tigerwalk Espresso, product photo from Equator Coffees</p>`,
  hifi:`<h4>What I listen on</h4><dl><dt>speakers</dt><dd>ELAC towers</dd><dt>amp</dt><dd>WiiM</dd><dt>dream</dt><dd>JBL L82</dd>
   <dt>note</dt><dd><span class="ph2">a line about your setup or a record to try</span></dd></dl>
-  <p class="credit">Receiver: Sansui G-6000, 1978 ad scan by Nesster, CC BY 2.0</p>`,
+  <p class="credit">Speakers: JBL L82 Classic MkII, product photo from JBL via Peter Tyson</p>`,
  tri:`<h4>Training</h4><dl><dt>race</dt><dd>Santa Cruz City Tri, Olympic distance</dd><dt>distance</dt><dd>1.5 km swim, 40 km bike, 10 km run</dd>
   <dt>why</dt><dd><span class="ph2">why you race, or your goal time</span></dd></dl>
   <p class="credit">Bib: Wharf to Wharf 2012 by fogcat5, CC BY-SA 2.0</p>`,
@@ -347,7 +349,7 @@ const BACK={
   <dt>note</dt><dd><span class="ph2">a line about shooting film</span></dd><dt>coming</dt><dd>a photos page, later</dd></dl>
   <p class="credit">Photo: Olympus Trip 35 by Marc Lacoste, CC BY 2.0</p>`
 };
-const FRONT={travel:'places I\'ve been',coffee:'coffee in rotation',hifi:'ELAC + WiiM',tri:'Santa Cruz City Tri',film:'35mm'};
+const FRONT={travel:'places I\'ve been',coffee:'coffee in rotation',hifi:'the dream: JBL L82',tri:'Santa Cruz City Tri',film:'35mm'};
 const PLACES=[{name:'California, home',coords:[37.34,-121.89]},{name:'Boston',coords:[42.36,-71.06]},{name:'New York, next: Nov 16',coords:[40.71,-74.0],next:1},{name:'London, next: Nov 19',coords:[51.51,-0.13],next:1},{name:'Paris',coords:[48.86,2.35]}];
 let openCard=null;
 function openSticker(btn){
