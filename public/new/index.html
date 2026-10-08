@@ -199,7 +199,7 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .hint{color:var(--faint);font-size:13px;margin:-6px 0 14px}
 .chestwrap{max-width:560px;container-type:inline-size;margin-top:14px}
 .chest{position:relative;width:100%;aspect-ratio:560/250}
-.chest .st{position:absolute;bottom:10%;border:0;padding:0;background:none;cursor:pointer;
+.chest .st{position:absolute;bottom:17%;border:0;padding:0;background:none;cursor:pointer;
   transform:translateY(var(--dy,0)) rotate(var(--r,0deg));transform-origin:50% 100%;
   transition:transform .45s var(--ease),filter .3s;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));z-index:1}
 .chest .st:hover,.chest .st:focus-visible{transform:translateY(calc(var(--dy,0px) - 7cqw)) rotate(calc(var(--r,0deg) * .4))}
@@ -416,11 +416,11 @@ const A='/new/p/';
 const IMG={travel:['passport.webp','a US passport'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a JBL L82 Classic speaker'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
- {id:'travel',label:'places',x:10,r:-8,dy:'-3cqw',mini:pic('travel',108)},
- {id:'film',label:'photos',x:21,r:-5,dy:'-13cqw',mini:pic('film',142)},
- {id:'coffee',label:'coffee',x:38,r:3,dy:'0cqw',mini:pic('coffee',128)},
- {id:'tri',label:'training',x:59,r:5,dy:'-4cqw',mini:pic('tri',136)},
- {id:'hifi',label:'listening',x:53,r:-2,dy:'0cqw',mini:pic('hifi',104)}
+ {id:'travel',label:'places',x:16.5,r:-8,dy:'-3cqw',mini:pic('travel',108)},
+ {id:'film',label:'photos',x:24,r:-5,dy:'-13cqw',mini:pic('film',142)},
+ {id:'coffee',label:'coffee',x:37,r:3,dy:'0cqw',mini:pic('coffee',128)},
+ {id:'tri',label:'training',x:59.5,r:5,dy:'-4cqw',mini:pic('tri',136)},
+ {id:'hifi',label:'listening',x:51,r:-2,dy:'0cqw',mini:pic('hifi',104)}
 ];
 const CHEST=`<img src="${A}crate-front.webp" alt="">`;
 const BACK={
