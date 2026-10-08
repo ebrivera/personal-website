@@ -5,6 +5,7 @@
 const URL_ = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
 const TOKEN = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
 const TTL_S = 6 * 60 * 60;
+export const storeKind = () => (URL_ && TOKEN ? "redis" : "memory");
 const memory = new Map<string, { name: string; expires: number }>();
 
 async function redis(cmd: (string | number)[]) {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { api, isConfigured, slimTrack } from "@/lib/spotify";
-import { pendingCount, putBackPending, rememberAdd, takePending, whoAdded } from "@/lib/visitorAdds";
+import { storeKind, pendingCount, putBackPending, rememberAdd, takePending, whoAdded } from "@/lib/visitorAdds";
 
 // Send songs visitors added while nothing was playing into the queue, oldest first.
 async function flushPending() {
@@ -49,6 +49,7 @@ export async function GET() {
             track: slimTrack(data.item),
             ...(data.is_playing ? await upNext() : { upNext: [], moreQueued: 0 }),
             waiting: data.is_playing ? 0 : await pendingCount(),
+            store: storeKind(),
           },
           { headers },
         );
@@ -64,6 +65,7 @@ export async function GET() {
         playedAt: item?.played_at ?? null,
         track: item ? slimTrack(item.track) : null,
         waiting: await pendingCount(),
+        store: storeKind(),
       },
       { headers },
     );
