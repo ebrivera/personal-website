@@ -585,18 +585,18 @@ $('#pi').style.width=(t/L*100)+'%';
     $('#lbl').textContent=d.playing?'on Spotify':(d.playedAt?'last played '+ago(d.playedAt):'last played');
     $('.eq').style.visibility=d.playing?'visible':'hidden';
     $('.qhead span').textContent=d.playing?"I'll hear it after this song":"it plays next time I'm listening";
-    showUpNext(d.upNext||[],d.moreQueued||0);
+    showUpNext(d.upNext||[],d.moreQueued||0,d.waiting||0);
     paint();
   }
   // Shared queue: the bar shows the next song, the popup lists the next few, visitor adds carry their name.
-  function showUpNext(list,more){
+  function showUpNext(list,more,waiting){
     const from=x=>x.from?' · from '+esc(x.from):'';
     let u=$('.upnext');
     if(list.length){if(!u){u=document.createElement('span');u.className='upnext';$('.np .t').after(u)}
       u.innerHTML='up next: '+esc(list[0].title)+from(list[0])}
     else if(u)u.remove();
-    const q=$('#qup');q.hidden=!list.length;
-    q.innerHTML=list.length?'coming up'+list.map(x=>`<div><b>${esc(x.title)}</b> ${esc(x.artist)}${from(x)}</div>`).join('')+(more?`<div>+${more} more queued by visitors</div>`:''):'';
+    const q=$('#qup');q.hidden=!list.length&&!waiting;
+    q.innerHTML=!list.length&&waiting?`${waiting} song${waiting>1?'s':''} from visitors waiting for when I'm back`:list.length?'coming up'+list.map(x=>`<div><b>${esc(x.title)}</b> ${esc(x.artist)}${from(x)}</div>`).join('')+(more?`<div>+${more} more queued by visitors</div>`:''):'';
   }
   async function poll(fresh){
     try{const r=await fetch('/api/spotify/now-playing'+(fresh?'?t='+Date.now():''),{cache:'no-store'});if(!r.ok)return false;
@@ -622,7 +622,7 @@ $('#pi').style.width=(t/L*100)+'%';
       let r=null,d={};
       try{r=await fetch('/api/spotify/queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({uri:t.uri,name:who})});d=await r.json().catch(()=>({}))}catch(e){}
       if(r&&r.ok){
-        qres.innerHTML=`<li class="done"><span class="c" style="background:${cover(t)}"></span><div><b>Queued: ${esc(t.title)}</b><span>thanks${who?', '+who:''}. it's in the queue</span></div></li>`;
+        qres.innerHTML=`<li class="done"><span class="c" style="background:${cover(t)}"></span><div><b>Queued: ${esc(t.title)}</b><span>thanks${who?', '+who:''}. ${d.pending?"it goes in my queue next time I'm listening":"it's in the queue"}</span></div></li>`;
         // refresh the bar and the "coming up" list from Spotify instead of guessing where the song landed
         setTimeout(()=>poll(true),700);setTimeout(()=>poll(true),3000);
         qbtn.textContent='queued ✓';setTimeout(()=>{close();qbtn.textContent='+ add to my queue'},1800);return}

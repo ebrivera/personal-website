@@ -35,3 +35,40 @@ export async function whoAdded(uris: string[]): Promise<(string | null)[]> {
     return m && m.expires > Date.now() ? m.name : null;
   });
 }
+
+// Songs added while nothing is playing. Spotify can only queue to an active player, so these wait
+// here and get sent to the queue the next time now-playing sees music playing.
+type Pending = { uri: string; name: string };
+const MAX_PENDING = 100;
+let memPending: Pending[] = [];
+
+export async function addPending(uri: string, name: string) {
+  const item = { uri, name };
+  if (URL_ && TOKEN) {
+    await redis(["RPUSH", "qpending", JSON.stringify(item)]);
+    await redis(["LTRIM", "qpending", -MAX_PENDING, -1]).catch(() => {});
+    return;
+  }
+  memPending = [...memPending, item].slice(-MAX_PENDING);
+}
+
+export async function takePending(): Promise<Pending[]> {
+  if (URL_ && TOKEN) {
+    const r = await redis(["LPOP", "qpending", MAX_PENDING]).catch(() => null);
+    return Array.isArray(r) ? r.map((x: string) => JSON.parse(x)) : [];
+  }
+  const out = memPending;
+  memPending = [];
+  return out;
+}
+
+export async function putBackPending(items: Pending[]) {
+  if (!items.length) return;
+  if (URL_ && TOKEN) await redis(["LPUSH", "qpending", ...items.map((i) => JSON.stringify(i)).reverse()]).catch(() => {});
+  else memPending = [...items, ...memPending];
+}
+
+export async function pendingCount(): Promise<number> {
+  if (URL_ && TOKEN) return Number(await redis(["LLEN", "qpending"]).catch(() => 0)) || 0;
+  return memPending.length;
+}
