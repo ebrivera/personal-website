@@ -84,6 +84,8 @@ body.open .contact{margin-top:auto;flex-wrap:wrap;gap:12px}
 .contact a:hover{color:var(--acc)}
 .contact svg{width:15px;height:15px;fill:currentColor}
 .contact .mail{margin-left:auto}
+.contact a.resume{border:1.5px solid var(--acc);color:var(--acc);border-radius:4px;padding:5px 11px;font-weight:600;font-size:13.5px}
+.contact a.resume:hover{background:var(--acc);color:var(--bg)}
 body.open .contact .mail{margin-left:0;flex-basis:100%}
 
 /* ---------- the page that slides in from the right ---------- */
@@ -359,7 +361,7 @@ const I={
 };
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 $('#exp').innerHTML=WORK.map(w=>`<li><span><b>${w[0]}</b> <span class="r">${w[1]}</span></span><span class="d">${w[2]}</span></li>`).join("");
-$('#contact').innerHTML=`<a href="https://github.com/ebrivera" target="_blank" rel="noopener" aria-label="GitHub">${I.gh}</a><a href="https://www.linkedin.com/in/ernestobrivera/" target="_blank" rel="noopener" aria-label="LinkedIn">${I.li}</a><a href="https://x.com/ernestobrivera" target="_blank" rel="noopener" aria-label="X">${I.x}</a><a class="mail" href="mailto:ebrivera@bu.edu">${I.mail}<span>say hi</span></a>`;
+$('#contact').innerHTML=`<a href="https://github.com/ebrivera" target="_blank" rel="noopener" aria-label="GitHub">${I.gh}</a><a href="https://www.linkedin.com/in/ernestobrivera/" target="_blank" rel="noopener" aria-label="LinkedIn">${I.li}</a><a href="https://x.com/ernestobrivera" target="_blank" rel="noopener" aria-label="X">${I.x}</a><a class="resume" href="/ErnestoRivera_Resume.pdf" download="ErnestoRivera_Resume.pdf" aria-label="Download resume (PDF)"><svg viewBox="0 0 24 24"><path d="M11 3h2v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6zM4 19h16v2H4z"/></svg><span>Resume</span></a><a class="mail" href="mailto:ebrivera@bu.edu">${I.mail}<span>say hi</span></a>`;
 
 const PAGES={
  about:()=>`<h2>About</h2><p class="sub">the longer version</p>
