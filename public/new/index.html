@@ -416,11 +416,11 @@ const A='/new/p/';
 const IMG={travel:['passport.webp','a US passport'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a JBL L82 Classic speaker'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
- {id:'travel',label:'places',x:16.5,r:-8,dy:'-3cqw',mini:pic('travel',108)},
- {id:'film',label:'photos',x:24,r:-5,dy:'-13cqw',mini:pic('film',142)},
- {id:'coffee',label:'coffee',x:37,r:3,dy:'0cqw',mini:pic('coffee',128)},
- {id:'tri',label:'training',x:59.5,r:5,dy:'-4cqw',mini:pic('tri',136)},
- {id:'hifi',label:'listening',x:51,r:-2,dy:'0cqw',mini:pic('hifi',104)}
+ {id:'travel',label:'places',x:13,r:-8,dy:'-3cqw',mini:pic('travel',108)},
+ {id:'film',label:'photos',x:22,r:-5,dy:'-13cqw',mini:pic('film',142)},
+ {id:'coffee',label:'coffee',x:38,r:3,dy:'0cqw',mini:pic('coffee',128)},
+ {id:'tri',label:'training',x:60.5,r:5,dy:'-4cqw',mini:pic('tri',136)},
+ {id:'hifi',label:'listening',x:53.5,r:-2,dy:'0cqw',mini:pic('hifi',104)}
 ];
 const CHEST=`<img src="${A}crate-front.webp" alt="">`;
 const BACK={
