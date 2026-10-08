@@ -122,6 +122,8 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .rows .t{display:flex;justify-content:space-between;gap:16px}
 .rows b{font-weight:500}
 .rows .t span{color:var(--faint);font-size:13.5px}
+.rows .t .visit{flex-shrink:0;white-space:nowrap;align-self:baseline;color:var(--muted);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.rows a:hover .visit{color:var(--acc);text-decoration-color:var(--acc)}
 .rows p{color:var(--muted);font-size:14px;margin-top:2px}
 
 /* ---------- toned-down spotify bar ---------- */
@@ -374,7 +376,7 @@ const PAGES={
    </div></div></div>
   <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebrivera@bu.edu">email</a> or my <a href="#" class="missing" title="calendly link needed" onclick="return false">calendly link</a>!</p></div>`,
  projects:()=>`<h2>Projects</h2><p class="sub">things I've built</p>
-  <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${p[0]} ↗</b><span>${host(p[2])}</span></div><p>${p[1]}</p></a></li>`).join("")}</ul>
+  <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${p[0]}</b><span class="visit" title="${host(p[2])}">visit</span></div><p>${p[1]}</p></a></li>`).join("")}</ul>
   <div class="sec"><p>Currently building in inference and RL, come back to see what I build!</p></div>`,
  blog:()=>`<h2>Blog</h2><p class="sub">things I've written</p>
   <ul class="rows posts">${POSTS.map(p=>`<li><a href="#blog/${p.slug}"><div class="t"><b>${p.title}</b><span>${p.date}</span></div></a></li>`).join("")}</ul>`
