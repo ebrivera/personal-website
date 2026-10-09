@@ -25,11 +25,11 @@ export default function Contact() {
 
             <div className="space-y-6">
               <ExternalLinkButton
-                href="mailto:ebrivera@bu.edu"
+                href="mailto:ebriverab@gmail.com"
                 className="group flex items-center gap-4 text-paper w-full text-left"
               >
                 <span className="w-8 h-px bg-paper/40 group-hover:w-12 group-hover:bg-amber transition-all duration-300" />
-                <span className="font-mono text-sm tracking-wide group-hover:text-amber group-hover:tracking-wider transition-all duration-300">ebrivera@bu.edu</span>
+                <span className="font-mono text-sm tracking-wide group-hover:text-amber group-hover:tracking-wider transition-all duration-300">ebriverab@gmail.com</span>
               </ExternalLinkButton>
 
               <ExternalLinkButton

@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ernesto Rivera</title>
-<meta name="description" content="ebrivera@bu.edu">
+<meta name="description" content="ebriverab@gmail.com">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="/new/icon.png">
 <link rel="apple-touch-icon" href="/new/apple-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.ebrivera.com/new">
 <meta property="og:title" content="Ernesto Rivera">
-<meta property="og:description" content="ebrivera@bu.edu">
+<meta property="og:description" content="ebriverab@gmail.com">
 <meta property="og:image" content="https://www.ebrivera.com/new/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ernesto Rivera">
-<meta name="twitter:description" content="ebrivera@bu.edu">
+<meta name="twitter:description" content="ebriverab@gmail.com">
 <meta name="twitter:image" content="https://www.ebrivera.com/new/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600&display=swap">
@@ -363,7 +363,7 @@ const I={
 };
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 $('#exp').innerHTML=WORK.map(w=>`<li><span><b>${w[0]}</b> <span class="r">${w[1]}</span></span><span class="d">${w[2]}</span></li>`).join("");
-$('#contact').innerHTML=`<a href="https://github.com/ebrivera" target="_blank" rel="noopener" aria-label="GitHub">${I.gh}</a><a href="https://www.linkedin.com/in/ernestobrivera/" target="_blank" rel="noopener" aria-label="LinkedIn">${I.li}</a><a href="https://x.com/ernestobrivera" target="_blank" rel="noopener" aria-label="X">${I.x}</a><a class="resume" href="/ErnestoRivera_Resume.pdf" download="ErnestoRivera_Resume.pdf" aria-label="Download resume (PDF)"><svg viewBox="0 0 24 24"><path d="M11 3h2v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6zM4 19h16v2H4z"/></svg><span>Resume</span></a><a class="mail" href="mailto:ebrivera@bu.edu">${I.mail}<span>say hi</span></a>`;
+$('#contact').innerHTML=`<a href="https://github.com/ebrivera" target="_blank" rel="noopener" aria-label="GitHub">${I.gh}</a><a href="https://www.linkedin.com/in/ernestobrivera/" target="_blank" rel="noopener" aria-label="LinkedIn">${I.li}</a><a href="https://x.com/ernestobrivera" target="_blank" rel="noopener" aria-label="X">${I.x}</a><a class="resume" href="/ErnestoRivera_Resume.pdf" download="ErnestoRivera_Resume.pdf" aria-label="Download resume (PDF)"><svg viewBox="0 0 24 24"><path d="M11 3h2v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6zM4 19h16v2H4z"/></svg><span>Resume</span></a><a class="mail" href="mailto:ebriverab@gmail.com">${I.mail}<span>say hi</span></a>`;
 
 const PAGES={
  about:()=>`<h2>About</h2><p class="sub">the longer version</p>
@@ -374,7 +374,7 @@ const PAGES={
     <div class="inside"><img src="${A}crate-back.webp" alt=""></div>
     <div class="box">${CHEST}</div>
    </div></div></div>
-  <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebrivera@bu.edu">email</a> or my <a href="#" class="missing" title="calendly link needed" onclick="return false">calendly link</a>!</p></div>`,
+  <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebriverab@gmail.com">email</a> or my <a href="https://calendly.com/ebriverab/30min" target="_blank" rel="noopener">calendly link</a>!</p></div>`,
  projects:()=>`<h2>Projects</h2><p class="sub">things I've built</p>
   <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${p[0]}</b><span class="visit" title="${host(p[2])}">visit</span></div><p>${p[1]}</p></a></li>`).join("")}</ul>
   <div class="sec"><p>Currently building in inference and RL, come back to see what I build!</p></div>`,
