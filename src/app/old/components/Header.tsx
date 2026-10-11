@@ -10,10 +10,10 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/old' },
+    { name: 'About', path: '/old/about' },
+    { name: 'Portfolio', path: '/old/portfolio' },
+    { name: 'Contact', path: '/old/contact' },
   ];
 
   // On the home hero, SnapHeroTitle already carries the full name + tagline
@@ -43,7 +43,7 @@ const Header = ({ scrolledPastFirst = false, isHome = false }) => {
 
           {showCompactTitle && (
             <Link
-              href="/"
+              href="/old"
               className="font-mono text-xs tracking-[0.2em] uppercase text-paper/80 hover:text-amber transition-colors"
             >
               Ernesto Rivera

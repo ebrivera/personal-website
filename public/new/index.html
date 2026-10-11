@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ernesto Rivera</title>
 <meta name="description" content="ebriverab@gmail.com">
-<meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="/new/icon.png">
 <link rel="apple-touch-icon" href="/new/apple-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.ebrivera.com/new">
+<meta property="og:url" content="https://www.ebrivera.com/">
+<link rel="canonical" href="https://www.ebrivera.com/">
 <meta property="og:title" content="Ernesto Rivera">
 <meta property="og:description" content="ebriverab@gmail.com">
 <meta property="og:image" content="https://www.ebrivera.com/new/og.png">
@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="Ernesto Rivera">
 <meta name="twitter:description" content="ebriverab@gmail.com">
 <meta name="twitter:image" content="https://www.ebrivera.com/new/og.png">
+<!-- Vercel Web Analytics + Speed Insights. Page views are sent by hand (see track() below) so each panel (#about, #blog/...) counts as its own page. -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js" data-disable-auto-track="1"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600&display=swap">
 <style>
@@ -198,7 +202,20 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 
 /* short laptop screens: keep the home on one screen */
 .col{overflow-y:auto;justify-content:safe center;scrollbar-width:none}
-@media (max-height:820px) and (min-width:821px){.col{padding:24px 0}.blurb{margin-top:14px}.blurb{font-size:14.5px;line-height:1.5}nav{margin-top:18px}.exp{margin-top:18px}.exp li{padding:7px 0}.contact{margin-top:18px}}
+/* rich text: paragraphs and bullet lists */
+.blurb .rich>*+*{margin-top:12px}
+.blurb .rich+.welcome{margin-top:12px}
+.inner .rich>*+*{margin-top:1em}
+.rich p+ul.ticks{margin-top:6px!important}
+.ticks{list-style:none;display:flex;flex-direction:column;gap:3px}
+.inner .ticks{max-width:52ch}
+.ticks li{position:relative;padding-left:18px}
+.ticks li::before{content:"";position:absolute;left:3px;top:.68em;width:6px;height:1.5px;background:var(--acc)}
+.where:empty{display:none}
+/* light bold: one step heavier than the text around it */
+strong.lb{font-weight:500;color:inherit}
+b strong.lb,h2 strong.lb,h4 strong.lb,.name strong.lb,nav strong.lb{font-weight:600}
+@media (max-height:960px) and (min-width:821px){.col{padding:24px 0}.blurb{margin-top:14px;font-size:14.5px;line-height:1.5}.blurb .rich>*+*,.blurb .rich+.welcome{margin-top:9px}.ticks{gap:1px}nav{margin-top:18px}.exp{margin-top:18px}.exp li{padding:7px 0}.contact{margin-top:18px}}
 /* ---------- show and tell: the toy chest ---------- */
 .hint{color:var(--faint);font-size:13px;margin:-6px 0 14px}
 .chestwrap{max-width:560px;container-type:inline-size;margin-top:14px}
@@ -250,6 +267,14 @@ h2{font-size:15.5px;font-weight:500;margin-bottom:6px}
 .legend{display:flex;gap:12px;font-size:12px}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
 .rows a{text-decoration:none}
+/* photos card: a short strip of film frames */
+.backside .strip{display:flex;gap:6px;background:#1f2421;padding:12px 8px;border-radius:3px;position:relative;
+  background-image:radial-gradient(circle at 50% 50%,#f4efe3 1.6px,transparent 2px),radial-gradient(circle at 50% 50%,#f4efe3 1.6px,transparent 2px);
+  background-size:12px 8px,12px 8px;background-position:0 1px,0 calc(100% + 0px);background-repeat:repeat-x}
+.backside .strip img{flex:1;min-width:0;aspect-ratio:3/2;object-fit:cover;display:block;border-radius:1px}
+.card.wide .backside{overflow:auto}
+#jmap path,#jmap circle{cursor:default}
+.jvm-tooltip{z-index:30}
 /* ---------- blog ---------- */
 .posts a{display:block}
 .posts .t span{white-space:nowrap}
@@ -274,11 +299,16 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
 
 <aside class="col">
   <div class="name"><button id="home">Ernesto Rivera</button><button class="homeicon" id="homenav" aria-label="home" title="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></svg></button></div>
-  <div class="fold"><div><p class="where">I'm Ernesto, I'm from California, and I love building projects people can use!</p></div></div>
+  <div class="fold"><div><p class="where"></p></div></div>
 
   <div class="fold blurb"><div>
-    <p>I've always been drawn to solving problems that can improve people's lives. A natural born problem solver, I was drawn to hackathons in college, surmounting over $65,000 in prize money along with Global Nomination in other competitions. Dabbled a bit in startups throughout college, working in EduTech + Dev Tools + Construction Tech. Previously at Wayfair on the Financing Technology Team delivering products that reached the millions of customers they had, and now working at IBM doing Agent Orchestration Infrastructure on watsonx Orchestrate.</p>
-    <p class="welcome">Thank you for taking the time to visit my website! I love talking to people about their background, what their working on, or what they're listening to, so feel free to reach out or add a song to my queue!</p>
+    <div class="rich">
+    <p>I work on the IBM watsonx Orchestrate team building agentic infrastructure.</p>
+    <p>I grew up in Las Vegas, Los Angeles, and Orange County. I recently graduated from Boston University with a degree in Computer Science, and now live in the Bay Area.</p>
+    <p>My general interests:</p>
+    <ul class="ticks"><li>Building software to solve everyday problems for people</li><li>The intersection of Distributed Systems and Artificial Intelligence</li><li>Startups, hackathons ($65,000+ wins), fast-paced environments, bold ideas</li><li>Exploring the world physically and culinarily (and caffeinatedly)</li></ul>
+    </div>
+    <p class="welcome">Thank you for taking the time to visit my website! I love talking to people about their background, what they're working on, or what they're listening to, so feel free to reach out, look through the rest of my website, or add a song to my queue!</p>
   </div></div>
 
   <nav>
@@ -351,9 +381,10 @@ svg{-ms-touch-action:none;touch-action:none}.jvm-container{touch-action:none;pos
 </template>
 
 <script>
-const WORK=[["IBM","Software Developer","2026 – Present"],["Cantena","Founder","2025 – 26"],["Wayfair","Software Engineer Intern","2025"],["Whiting-Turner","Data Architecture Engineer","2024"],["MyTA","Founding Engineer","2023 – 24"]];
-const PROJ=[["Swarm","Browser-native distributed LLM training","https://tryswarm.dev/"],["Agent Checkout Proof","Is your website ready for Agents to pay?","https://isyouragentreadytopay.vercel.app/"],["Does Not Exist","LLM Planner + Diffusion Model = On Demand Website","https://dne-canvas-demo-production.up.railway.app/demo"],["OCR Digit Classifier","Draw a digit, can we figure it out?","https://github.com/ebrivera/knn-ocr"]];
-const POSTS=[{slug:"training-across-browser-tabs",title:"Training a language model across browser tabs",date:"August 19th 2026"}];
+const WORK=[["IBM", "Software Developer", "2026 – Present"], ["Cantena", "Founder", "2025 – 26"], ["Wayfair", "Software Engineer Intern", "2025"], ["Whiting-Turner", "Data Architecture Engineer", "2024"], ["MyTA", "Founding Engineer", "2023 – 24"]];
+const PROJ=[["Swarm", "Browser-native distributed LLM training", "https://tryswarm.dev/"], ["Agent Checkout Proof", "Is your website ready for Agents to pay?", "https://isyouragentreadytopay.vercel.app/"], ["Does Not Exist", "LLM Planner + Diffusion Model = On Demand Website", "https://dne-canvas-demo-production.up.railway.app/demo"], ["OCR Digit Classifier", "Draw a digit, can we figure it out?", "https://github.com/ebrivera/knn-ocr"]];
+const POSTS=[{"slug": "training-across-browser-tabs", "title": "Training a language model across browser tabs", "date": "August 19th 2026"}];
+const md=s=>String(s).replace(/\*\*([^*]+?)\*\*/g,'<strong class="lb">$1</strong>');
 const host=u=>u.replace(/^https?:\/\//,'').replace(/\/$/,'');
 const I={
  gh:'<svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>',
@@ -362,23 +393,44 @@ const I={
  mail:'<svg viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/></svg>'
 };
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-$('#exp').innerHTML=WORK.map(w=>`<li><span><b>${w[0]}</b> <span class="r">${w[1]}</span></span><span class="d">${w[2]}</span></li>`).join("");
+/* ---------- analytics: one page view per panel, plus a few custom events ---------- */
+const track=(name,data)=>{try{window.va('event',{name,data})}catch(e){}};
+let lastView=null;
+const pageview=p=>{const path='/'+(p||'');if(path===lastView)return;lastView=path;
+  try{window.va('pageview',{route:p&&p.startsWith('blog/')?'/blog/[slug]':path,path})}catch(e){}};
+document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const h=a.getAttribute('href');
+  if(h.endsWith('.pdf'))track('Resume Downloaded');
+  else if(h.startsWith('mailto:'))track('Contact Clicked',{via:'email',from:a.closest('.contact')?'sidebar':'about'});
+  else if(h.includes('calendly.com'))track('Contact Clicked',{via:'calendly'});
+  else if(h.includes('linkedin.com'))track('Contact Clicked',{via:'linkedin'});
+  else if(h.includes('x.com/'))track('Contact Clicked',{via:'x'});
+  else if(h==='https://github.com/ebrivera')track('Contact Clicked',{via:'github'});
+  else if(a.closest('.rows')&&!a.closest('.posts'))track('Project Visited',{name:a.querySelector('b').textContent});
+  else if(a.closest('.np'))track('Song Opened On Spotify');},true);
+$('#exp').innerHTML=WORK.map(w=>`<li><span><b>${md(w[0])}</b> <span class="r">${md(w[1])}</span></span><span class="d">${w[2]}</span></li>`).join("");
 $('#contact').innerHTML=`<a href="https://github.com/ebrivera" target="_blank" rel="noopener" aria-label="GitHub">${I.gh}</a><a href="https://www.linkedin.com/in/ernestobrivera/" target="_blank" rel="noopener" aria-label="LinkedIn">${I.li}</a><a href="https://x.com/ernestobrivera" target="_blank" rel="noopener" aria-label="X">${I.x}</a><a class="resume" href="/ErnestoRivera_Resume.pdf" download="ErnestoRivera_Resume.pdf" aria-label="Download resume (PDF)"><svg viewBox="0 0 24 24"><path d="M11 3h2v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6zM4 19h16v2H4z"/></svg><span>Resume</span></a><a class="mail" href="mailto:ebriverab@gmail.com">${I.mail}<span>say hi</span></a>`;
 
 const PAGES={
- about:()=>`<h2>About</h2><p class="sub">the longer version</p>
-  <p><span class="ph">the expanded about, coming from you</span></p>
-  <div class="sec"><h3>Show and tell</h3><p class="hint">pull something out of the chest</p>
+ about:()=>`<h2>About</h2><p class="sub">curious to learn more?</p>
+  <div class="rich">
+  <p>If you've made it this far, thank you once again. I'm Ernesto, and I'd love to tell you more about who I am, what interests me, and how I got here.</p>
+  <p>I was born with a love for solving problems. With the abundance of books I was gifted as a 6-year-old, the first thing my dad taught me to build was a bookshelf. I loved assembling and giving life to parts and pieces, which is naturally how I fell into robotics. Moving from school to school, I couldn't count on robotics to be a constant.</p>
+  <p>I was introduced properly to Java in my 7th grade AP Computer Science class. I unknowingly opened Pandora's box, and discovered how much you could do behind the 104 keys on your computer. Simultaneously being bored with current solutions, I turned to my love for programming when I started my first high school internship doing manual data entry and became engulfed in the wonders of Computer Vision. Since then, I've only gained a deeper appreciation for the variety of tools we have access to and regularly experimented with new technologies at the hackathons I frequented in college. Agents, MetaHumans, Virtual Reality, Digital Twins, and Voice Agents just to name a few of the tricks I've pulled out of my sleeve to help with the success in the competitions I've attended.</p>
+  <p>Which brings me to my love for startups. I obsess over the technology I build, and I'm drawn to people who similarly obsess over solving problems. I enjoy fast-paced environments where I can be proud to own the work I put out, and be surrounded by people who are willing to take bold risks. I've been a part of a few startups throughout college, between translation services, EduTech, DevTooling and Construction Tech, but the main thing I learned is that contributing to a determined team is euphoric.</p>
+  <p>I've spent some time at larger companies as well. I spent a summer with Wayfair developing on their Financing Technology team on services that reached the millions of customers they had, and now I'm working at IBM doing Agent Orchestration Infrastructure.</p>
+  <p>As I look to the future, I am excited about the opportunity to contribute to the frontier. I'm always finding interest in new subjects, but I'm currently fascinated with building and exploring projects in Inference, Distributed Systems, Computer Vision, FinTech, Agent Communication and Interaction, HCI, and Robotics. I like to surround myself with other inquisitive, determined, and kind people. I'm always looking to make new friends, and share ideas, so please feel free to reach out if any of this resonates with you.</p>
+  </div>
+  <div class="sec"><h3>Show and tell</h3><p class="hint">you'll find some of my biggest interests in this crate; click on any to learn more!</p>
    <div class="chestwrap"><div class="chest" id="chest">
     ${STICKERS.map((k,i)=>`<button class="st" data-k="${k.id}" style="left:${k.x}%;--r:${k.r}deg;--dy:${k.dy}" aria-label="${k.label}"><span class="tag">${k.label}</span>${k.mini}</button>`).join("")}
     <div class="inside"><img src="${A}crate-back.webp" alt=""></div>
     <div class="box">${CHEST}</div>
    </div></div></div>
-  <div class="sec"><p>Thank you for visiting my website, if you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebriverab@gmail.com">email</a> or my <a href="https://calendly.com/ebriverab/30min" target="_blank" rel="noopener">calendly link</a>!</p></div>`,
- projects:()=>`<h2>Projects</h2><p class="sub">things I've built</p>
-  <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${p[0]}</b><span class="visit" title="${host(p[2])}">visit</span></div><p>${p[1]}</p></a></li>`).join("")}</ul>
+  <div class="sec"><p>Thank you for visiting my website! If you've made it this far, let's set up time to talk! Reach out via <a href="mailto:ebriverab@gmail.com">email</a> or my <a href="https://calendly.com/ebriverab/30min" target="_blank" rel="noopener">calendly link</a>!</p></div>`,
+ projects:()=>`<h2>Projects</h2><p class="sub">here are some things I've built!</p>
+  <ul class="rows">${PROJ.map(p=>`<li><a href="${p[2]}" target="_blank" rel="noopener"><div class="t"><b>${md(p[0])}</b><span class="visit" title="${host(p[2])}">visit</span></div><p>${md(p[1])}</p></a></li>`).join("")}</ul>
   <div class="sec"><p>Currently building in inference and RL, come back to see what I build!</p></div>`,
- blog:()=>`<h2>Blog</h2><p class="sub">things I've written</p>
+ blog:()=>`<h2>Blog</h2><p class="sub">thoughts I'd like to share</p>
   <ul class="rows posts">${POSTS.map(p=>`<li><a href="#blog/${p.slug}"><div class="t"><b>${p.title}</b><span>${p.date}</span></div></a></li>`).join("")}</ul>`
 };
 const post=slug=>{const p=POSTS.find(x=>x.slug===slug),t=document.getElementById('post-'+slug);return p&&t?`<h2>${p.title}</h2><p class="sub">Ernesto Rivera · ${p.date}</p>
@@ -420,41 +472,38 @@ const A='/new/p/';
 const IMG={travel:['passport.webp','a US passport'],coffee:['coffee.webp','a bag of Equator Tigerwalk Espresso'],hifi:['l82.webp','a JBL L82 Classic speaker'],tri:['bib.webp','Wharf to Wharf race bib'],film:['camera.webp','Olympus Trip 35 film camera']};
 const pic=(k,w)=>`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}" style="width:calc(${w}cqw / 5.6)"${k==='hifi'?' class="recv"':''}>`;
 const STICKERS=[
- {id:'travel',label:'places',x:13,r:-8,dy:'-3cqw',mini:pic('travel',108)},
- {id:'film',label:'photos',x:22,r:-5,dy:'-13cqw',mini:pic('film',142)},
- {id:'coffee',label:'coffee',x:38,r:3,dy:'0cqw',mini:pic('coffee',128)},
- {id:'tri',label:'training',x:60.5,r:5,dy:'-4cqw',mini:pic('tri',136)},
- {id:'hifi',label:'listening',x:53.5,r:-2,dy:'0cqw',mini:pic('hifi',104)}
+ {id:'travel',label:"travel",x:13,r:-8,dy:'-3cqw',mini:pic('travel',108)},
+ {id:'film',label:"photos",x:22,r:-5,dy:'-13cqw',mini:pic('film',142)},
+ {id:'coffee',label:"coffee",x:38,r:3,dy:'0cqw',mini:pic('coffee',128)},
+ {id:'tri',label:"training",x:60.5,r:5,dy:'-4cqw',mini:pic('tri',136)},
+ {id:'hifi',label:"listening",x:53.5,r:-2,dy:'0cqw',mini:pic('hifi',104)}
 ];
 const CHEST=`<img src="${A}crate-front.webp" alt="">`;
+const FILM=['film1.webp','film2.webp','film3.webp'];
 const BACK={
- travel:`<h4>Places</h4><dl><dt>favorite</dt><dd><span class="ph2">your favorite place and why</span></dd>
-  <dt>next</dt><dd>New York on Nov 16, then London on Nov 19</dd>
-  <dt>pinned</dt><dd>California, Boston, New York, London, Paris</dd></dl>
+ travel:`<h4>Places</h4><dl><dt>favorite</dt><dd>Tie between Amsterdam &amp; Bangkok! But every place holds a special place in my heart</dd><dt>next</dt><dd>New York on Nov 16, then London on Nov 19</dd></dl>
   <p class="credit">Photo: US passport by ajay_suresh, CC BY 2.0</p>`,
- coffee:`<h4>Coffee in rotation</h4><dl><dt>beans</dt><dd>Equator, Mexico</dd><dt>machine</dt><dd>Breville Bambino Plus</dd>
-  <dt>eyeing</dt><dd>a grinder upgrade, Opus 2 or Turin DF54</dd><dt>setup</dt><dd><span class="ph2">links to your setup</span></dd></dl>
+ coffee:`<h4>Coffee in rotation</h4><dl><dt>beans</dt><dd>Equator, Mexico</dd><dt>machine</dt><dd>Breville Bambino Plus</dd><dt>eyeing</dt><dd>a grinder upgrade, Opus 2 or Turin DF54</dd></dl>
   <p class="credit">Bag: Tigerwalk Espresso, product photo from Equator Coffees</p>`,
- hifi:`<h4>What I listen on</h4><dl><dt>speakers</dt><dd>ELAC towers</dd><dt>amp</dt><dd>WiiM</dd><dt>dream</dt><dd>JBL L82</dd>
-  <dt>note</dt><dd><span class="ph2">a line about your setup or a record to try</span></dd></dl>
+ hifi:`<h4>What I listen on</h4><dl><dt>speakers</dt><dd>ELAC towers</dd><dt>amp</dt><dd>WiiM</dd><dt>dream</dt><dd>JBL L82</dd><dt>note</dt><dd>I love listening to music, and getting good speakers upgraded my experience.</dd></dl>
   <p class="credit">Speaker: JBL L82 Classic MkII, product photo from JBL via Peter Tyson</p>`,
- tri:`<h4>Training</h4><dl><dt>race</dt><dd>Santa Cruz City Tri, Olympic distance</dd><dt>distance</dt><dd>1.5 km swim, 40 km bike, 10 km run</dd>
-  <dt>why</dt><dd><span class="ph2">why you race, or your goal time</span></dd></dl>
+ tri:`<h4>Training</h4><dl><dt>raced</dt><dd>Santa Cruz City Tri, Olympic distance, on Sunday, Sept 27</dd><dt>distance</dt><dd>1.5 km swim, 40 km bike, 10 km run</dd><dt>why</dt><dd>A good reason to get back into shape, and a fun way to explore Santa Cruz while I'm out here in the Bay.</dd></dl>
   <p class="credit">Bib: Wharf to Wharf 2012 by fogcat5, CC BY-SA 2.0</p>`,
- film:`<h4>Photos</h4><dl><dt>camera</dt><dd>my mom's old Olympus, on 35mm film</dd>
-  <dt>note</dt><dd><span class="ph2">a line about shooting film</span></dd><dt>coming</dt><dd>a photos page, later</dd></dl>
+ film:`<h4>Photos</h4><dl><dt>camera</dt><dd>my mom's old Olympus, on 35mm film</dd></dl><div class="strip">${FILM.map(f=>`<img src="${A}${f}" alt="">`).join('')}</div>
   <p class="credit">Photo: Olympus Trip 35 by Marc Lacoste, CC BY 2.0</p>`
 };
-const FRONT={travel:'places I\'ve been',coffee:'coffee in rotation',hifi:'the dream: JBL L82',tri:'Santa Cruz City Tri',film:'35mm'};
-const PLACES=[{name:'California, home',coords:[37.34,-121.89]},{name:'Boston',coords:[42.36,-71.06]},{name:'New York, next: Nov 16',coords:[40.71,-74.0],next:1},{name:'London, next: Nov 19',coords:[51.51,-0.13],next:1},{name:'Paris',coords:[48.86,2.35]}];
+const FRONT={"travel": "places I've been", "coffee": "coffee in rotation", "hifi": "the dream: JBL L82", "tri": "Santa Cruz City Tri", "film": "35mm"};
+// every dot on the places map: a small card on hover, nothing to click
+const PLACES=[{"city":"Tokyo","country":"Japan","coords":[35.68,139.69]},{"city":"Kyoto","country":"Japan","coords":[35.01,135.77]},{"city":"Osaka","country":"Japan","coords":[34.69,135.5]},{"city":"Kobe","country":"Japan","coords":[34.69,135.2]},{"city":"Kuala Lumpur","country":"Malaysia","coords":[3.14,101.69]},{"city":"Penang","country":"Malaysia","coords":[5.41,100.33]},{"city":"Singapore","country":"Singapore","coords":[1.35,103.82]},{"city":"Bangkok","country":"Thailand","coords":[13.76,100.5]},{"city":"Hanoi","country":"Vietnam","coords":[21.03,105.85]},{"city":"Chengdu","country":"China","coords":[30.57,104.07]},{"city":"Abu Dhabi","country":"United Arab Emirates","coords":[24.45,54.38]},{"city":"London","country":"United Kingdom","coords":[51.51,-0.13]},{"city":"Manchester","country":"United Kingdom","coords":[53.48,-2.24]},{"city":"Liverpool","country":"United Kingdom","coords":[53.41,-2.98]},{"city":"Paris","country":"France","coords":[48.86,2.35]},{"city":"Marseille","country":"France","coords":[43.3,5.37]},{"city":"Amsterdam","country":"Netherlands","coords":[52.37,4.9]},{"city":"Berlin","country":"Germany","coords":[52.52,13.4]},{"city":"Munich","country":"Germany","coords":[48.14,11.58]},{"city":"Salzburg","country":"Austria","coords":[47.81,13.06]},{"city":"Budapest","country":"Hungary","coords":[47.5,19.04]},{"city":"Geneva","country":"Switzerland","coords":[46.2,6.14]},{"city":"Rome","country":"Italy","coords":[41.9,12.5]},{"city":"Florence","country":"Italy","coords":[43.77,11.26]},{"city":"Venice","country":"Italy","coords":[45.44,12.32]},{"city":"Santiago de Compostela","country":"Spain","coords":[42.88,-8.54]},{"city":"Lisbon","country":"Portugal","coords":[38.72,-9.14]},{"city":"Toronto","country":"Canada","coords":[43.65,-79.38]},{"city":"Mexico City","country":"Mexico","coords":[19.43,-99.13]},{"city":"San Francisco","country":"United States","coords":[37.77,-122.42]},{"city":"Los Angeles","country":"United States","coords":[34.05,-118.24]},{"city":"San Diego","country":"United States","coords":[32.72,-117.16]},{"city":"Las Vegas","country":"United States","coords":[36.17,-115.14]},{"city":"Seattle","country":"United States","coords":[47.61,-122.33]},{"city":"Portland","country":"United States","coords":[45.52,-122.68]},{"city":"Anchorage","country":"United States","coords":[61.22,-149.9]},{"city":"Hawaii","country":"United States","coords":[21.31,-157.86]},{"city":"Salt Lake City","country":"United States","coords":[40.76,-111.89]},{"city":"Zion National Park","country":"United States","coords":[37.3,-113.03]},{"city":"Yellowstone National Park","country":"United States","coords":[44.43,-110.59]},{"city":"Mount Rushmore","country":"United States","coords":[43.88,-103.46]},{"city":"Denver","country":"United States","coords":[39.74,-104.99]},{"city":"Austin","country":"United States","coords":[30.27,-97.74]},{"city":"San Antonio","country":"United States","coords":[29.42,-98.49]},{"city":"Chicago","country":"United States","coords":[41.88,-87.63]},{"city":"Interlochen","country":"United States","coords":[44.64,-85.77]},{"city":"New Orleans","country":"United States","coords":[29.95,-90.07]},{"city":"Pensacola","country":"United States","coords":[30.42,-87.22]},{"city":"Orlando","country":"United States","coords":[28.54,-81.38]},{"city":"Atlanta","country":"United States","coords":[33.75,-84.39]},{"city":"Savannah","country":"United States","coords":[32.08,-81.09]},{"city":"Washington, D.C.","country":"United States","coords":[38.91,-77.04]},{"city":"New York City","country":"United States","coords":[40.71,-74.01]},{"city":"New Haven","country":"United States","coords":[41.31,-72.92]},{"city":"Boston","country":"United States","coords":[42.36,-71.06]},{"city":"Madrid","country":"Spain","coords":[40.42,-3.7]}];
 let openCard=null;
 function openSticker(btn){
   if(openCard)return;
   const k=btn.dataset.k,from=btn.getBoundingClientRect(),pg=$('#page').getBoundingClientRect();
+  track('Sticker Opened',{item:k});
   const scrim=document.createElement('div');scrim.className='scrim';document.body.appendChild(scrim);
   const card=document.createElement('div');card.className='card'+(k==='travel'?' wide':'');
   const art=k==='travel'?'<div id="jmap"></div>':`<img src="${A}${IMG[k][0]}" alt="${IMG[k][1]}"${k==='hifi'?' style="border-radius:8px"':''}>`;
-  const legend=k==='travel'?`<span class="legend"><span><i style="background:${C.gold}"></i>been</span><span><i style="background:${C.red}"></i>next</span></span>`:'';
+  const legend=k==='travel'?`<span class="legend"><span><i style="background:${C.gold}"></i>been</span></span>`:'';
   card.innerHTML=`<div class="flip"><div class="face front"><div class="cardart${k==='travel'?' mapart':''}">${art}</div>
     <div class="cap"><span>${FRONT[k]}</span>${legend}<span class="cardbtns"><button data-a="flip">turn over</button><button data-a="close" aria-label="put it back">×</button></span></div></div>
     <div class="face backside">${BACK[k]}<div class="cardbtns"><button data-a="flip">turn over</button><button data-a="close">put it back</button></div></div></div>`;
@@ -467,9 +516,11 @@ function openSticker(btn){
   card.animate([{transform:`translate(${dx}px,${dy}px) scale(${sx},${sy}) rotate(${getComputedStyle(btn).getPropertyValue('--r')})`,opacity:.6},{transform:'translate(0,-24px) scale(1.04)',opacity:1,offset:.7},{transform:'none',opacity:1}],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)'});
   let vmap=null;
   if(k==='travel')setTimeout(()=>{try{vmap=new jsVectorMap({selector:'#jmap',map:'world',zoomButtons:true,zoomOnScroll:false,backgroundColor:'transparent',
-     regionStyle:{initial:{fill:'#54796d',stroke:'#f4efe3',strokeWidth:.5},hover:{fill:'#3f6256'}},
-     markers:PLACES,markerStyle:{initial:{fill:C.gold,stroke:'#2f4b40',strokeWidth:1.5,r:6},hover:{fill:'#fff'}},
-     onLoaded(m){PLACES.forEach((p,i)=>{if(p.next){const el=document.querySelector(`#jmap [data-index="${i}"]`);el&&el.setAttribute('fill',C.red)}})}})}catch(e){$('#jmap').innerHTML='<p style="padding:20px;color:var(--muted)">map could not load</p>'}},700);
+     regionStyle:{initial:{fill:'#54796d',stroke:'#f4efe3',strokeWidth:.5},hover:{fill:'#54796d',cursor:'default'}},
+     showTooltip:true,markers:PLACES.map(x=>({name:x.city,coords:x.coords})),
+     markerStyle:{initial:{fill:C.gold,stroke:'#2f4b40',strokeWidth:1,r:3.2},hover:{fill:'#fff6d8',stroke:'#2f4b40',cursor:'default'}},
+     onRegionTooltipShow(e,t){t.hide()},
+     onMarkerTooltipShow(e,t,i){const x=PLACES[i];t.text(`<b>${x.city}</b>${x.country?'<br>'+x.country:''}`,true)}})}catch(e){$('#jmap').innerHTML='<p style="padding:20px;color:var(--muted)">map could not load</p>'}},700);
   // put it back: the card fades away while the sticker itself flies back to its spot in the chest
   let closing=false;
   const close=()=>{if(closing)return;closing=true;scrim.classList.remove('on');
@@ -490,7 +541,7 @@ function openSticker(btn){
     fly.animate(frames,{duration:480,easing:'cubic-bezier(.3,.7,.2,1)',fill:'forwards'}).onfinish=()=>{
       btn.classList.remove('out');fly.remove();btn.animate([{translate:`0 ${-lift}px`},{translate:'0 0'}],{duration:280,easing:'cubic-bezier(.5,0,.6,1.25)'});try{vmap&&vmap.destroy()}catch(e){};document.querySelectorAll('.jvm-tooltip').forEach(t=>t.remove());
       card.remove();scrim.remove();openCard=null;btn.focus({preventScroll:true})}};
-  card.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(!a)return;if(a.dataset.a==='flip')card.classList.toggle('back');else close()});
+  card.addEventListener('click',e=>{const a=e.target.closest('[data-a]');if(!a)return;if(a.dataset.a==='flip'){card.classList.toggle('back');if(card.classList.contains('back'))track('Card Turned Over',{item:k})}else close()});
   scrim.onclick=close;openCard={close};
   setTimeout(()=>card.querySelector('[data-a=flip]').focus({preventScroll:true}),660);
 }
@@ -506,6 +557,7 @@ function go(p){
   if(openCard)openCard.close();
   const inner=$('#inner');
   $$('nav button[data-p]').forEach(b=>b.classList.toggle('on',!!p&&b.dataset.p===p.split('/')[0]));
+  pageview(p);
   if(!p){document.body.classList.remove('open');cur=null;inner.classList.remove('show');try{history.replaceState(null,'',location.pathname)}catch(e){};return}
   const wasOpen=document.body.classList.contains('open');
   inner.classList.remove('show');
@@ -519,7 +571,7 @@ $('#homenav').onclick=()=>go(null);
 $('#home').onclick=()=>go(null);
 addEventListener('keydown',e=>{if(e.key==='Escape')go(null)});
 addEventListener('hashchange',()=>go(view(location.hash.slice(1))?location.hash.slice(1):null));
-if(view(location.hash.slice(1)))go(location.hash.slice(1));
+if(view(location.hash.slice(1)))go(location.hash.slice(1));else pageview(null);
 
 // big album card
 (function(){
@@ -537,7 +589,7 @@ if(view(location.hash.slice(1)))go(location.hash.slice(1));
     ['click','wheel','touchmove','keydown','scroll'].forEach(e=>removeEventListener(e,close,{capture:true}));
     big.classList.add('out');setTimeout(()=>{if(big.classList.contains('out'))big.hidden=true},250);
   }
-  art.onclick=e=>{if(big.hidden||big.classList.contains('out')){e.stopPropagation();open()}};
+  art.onclick=e=>{if(big.hidden||big.classList.contains('out')){e.stopPropagation();open();track('Album Art Opened')}};
 })();
 
 // add to queue (mock: a real version calls a small API route that adds to Spotify)
@@ -622,10 +674,12 @@ $('#pi').style.width=(t/L*100)+'%';
       let r=null,d={};
       try{r=await fetch('/api/spotify/queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({uri:t.uri,name:who})});d=await r.json().catch(()=>({}))}catch(e){}
       if(r&&r.ok){
+        track('Song Queued',{title:t.title.slice(0,200),artist:t.artist.slice(0,200),named:who?'yes':'no'});
         qres.innerHTML=`<li class="done"><span class="c" style="background:${cover(t)}"></span><div><b>Queued: ${esc(t.title)}</b><span>thanks${who?', '+who:''}. ${d.pending?"it goes in my queue next time I'm listening":"it's in the queue"}</span></div></li>`;
         // refresh the bar and the "coming up" list from Spotify instead of guessing where the song landed
         setTimeout(()=>poll(true),700);setTimeout(()=>poll(true),3000);
         qbtn.textContent='queued ✓';setTimeout(()=>{close();qbtn.textContent='+ add to my queue'},1800);return}
+      track('Queue Failed',{reason:d.error||'error'});
       const msg=d.error==='not_listening'?"I'm not listening right now, so there's no queue to add to. try again later"
         :"that didn't go through, try again in a bit";
       qres.innerHTML=`<li class="done">${msg}</li>`;
@@ -633,7 +687,7 @@ $('#pi').style.width=(t/L*100)+'%';
     const open=()=>{poll(true);qpop.hidden=false;qbtn.setAttribute('aria-expanded',true);qin.value='';qres.innerHTML=hint;qin.focus()};
     const close=()=>{qpop.hidden=true;qbtn.setAttribute('aria-expanded',false)};
     let deb;qin.oninput=()=>{clearTimeout(deb);deb=setTimeout(search,250)};
-    qbtn.onclick=()=>qpop.hidden?open():close();
+    qbtn.onclick=()=>{if(qpop.hidden){open();track('Queue Opened')}else close()};
     qin.onkeydown=e=>{e.stopPropagation();if(e.key==='Enter'){const f=$('#qres li[data-i]');f&&f.click()}if(e.key==='Escape')close()};
   });
 })();
