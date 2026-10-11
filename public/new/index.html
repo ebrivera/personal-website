@@ -267,6 +267,13 @@ b strong.lb,h2 strong.lb,h4 strong.lb,.name strong.lb,nav strong.lb{font-weight:
 .legend{display:flex;gap:12px;font-size:12px}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
 .rows a{text-decoration:none}
+/* about only: a quiet scroll meter on the right edge. It shows while you scroll (and once as a hint), then fades away */
+.meter{position:fixed;right:12px;top:calc((100% - 56px) / 2);z-index:4;display:flex;flex-direction:column;align-items:flex-end;pointer-events:none;
+  opacity:0;transform:translate(8px,-50%);transition:opacity .45s ease,transform .55s var(--ease)}
+.meter.on{opacity:1;transform:translate(0,-50%)}
+.meter i{display:block;height:2px;width:3px;margin:3.5px 0;border-radius:2px;background:var(--ink);opacity:.4;will-change:width}
+@media (max-width:820px){.meter{right:2px}.meter i{margin:3px 0}}
+@media (prefers-reduced-motion:reduce){.meter{transform:translate(0,-50%)}}
 /* photos card: a short strip of film frames */
 .backside .strip{display:flex;gap:6px;background:#1f2421;padding:12px 8px;border-radius:3px;position:relative;
   background-image:radial-gradient(circle at 50% 50%,#f4efe3 1.6px,transparent 2px),radial-gradient(circle at 50% 50%,#f4efe3 1.6px,transparent 2px);
@@ -552,16 +559,40 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=null;
     b.animate([{translate:'0 0'},{translate:'0 -14px',offset:.35},{translate:'0 0',offset:.7},{translate:'0 -4px',offset:.85},{translate:'0 0'}],{duration:700,easing:'ease-out'})},2600)}
 addEventListener('keydown',e=>{if(e.key==='Escape'&&openCard){e.stopImmediatePropagation();openCard.close()}},true);
 
+/* ---------- scroll meter (about only) ---------- */
+const meter=(()=>{
+  const el=document.createElement('div');el.className='meter';el.setAttribute('aria-hidden','true');document.body.appendChild(el);
+  const pg=$('#page'),phone=matchMedia('(max-width:820px)'),still=matchMedia('(prefers-reduced-motion: reduce)');
+  let on=false,ticks=[],pos=0,target=0,raf=0,hideT=0,hintT=0;
+  const src=()=>phone.matches?document.scrollingElement:pg;
+  const room=()=>{const s=src();return s.scrollHeight-s.clientHeight};
+  const build=()=>{const n=Math.max(16,Math.min(34,Math.round(Math.min(innerHeight*.46,340)/9)));
+    if(ticks.length!==n){el.innerHTML='<i></i>'.repeat(n);ticks=[...el.children]}};
+  // a small wave of longer ticks around where you are, like a magnifier sliding down a ruler
+  const draw=()=>{const n=ticks.length-1;
+    ticks.forEach((t,i)=>{const d=i-pos*n,k=Math.exp(-d*d/5);t.style.width=(3+(phone.matches?10:21)*k).toFixed(1)+'px';t.style.opacity=(.38+.55*k).toFixed(2)})};
+  const loop=()=>{pos+=(target-pos)*(still.matches?1:.22);draw();raf=Math.abs(target-pos)>.0005?requestAnimationFrame(loop):0};
+  const read=()=>{const r=room();target=r>0?Math.min(1,Math.max(0,src().scrollTop/r)):0;if(!raf)raf=requestAnimationFrame(loop)};
+  const show=ms=>{if(!on||room()<40)return;el.classList.add('on');clearTimeout(hideT);hideT=setTimeout(()=>el.classList.remove('on'),ms)};
+  const onScroll=()=>{if(!on)return;read();show(1100)};
+  pg.addEventListener('scroll',onScroll,{passive:true});addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',()=>{if(on){build();read()}});
+  return{page(p){on=p==='about';clearTimeout(hintT);clearTimeout(hideT);el.classList.remove('on');if(!on)return;
+    build();pos=target=0;draw();
+    // once the page has slid in, a short hint that there is more below (the chest), then it fades out
+    hintT=setTimeout(()=>{read();show(1600)},900)}};
+})();
+
 let cur=null;
 function go(p){
   if(openCard)openCard.close();
   const inner=$('#inner');
   $$('nav button[data-p]').forEach(b=>b.classList.toggle('on',!!p&&b.dataset.p===p.split('/')[0]));
   pageview(p);
-  if(!p){document.body.classList.remove('open');cur=null;inner.classList.remove('show');try{history.replaceState(null,'',location.pathname)}catch(e){};return}
+  if(!p){meter.page(null);document.body.classList.remove('open');cur=null;inner.classList.remove('show');try{history.replaceState(null,'',location.pathname)}catch(e){};return}
   const wasOpen=document.body.classList.contains('open');
   inner.classList.remove('show');
-  const swap=()=>{inner.innerHTML=view(p)();$('#page').scrollTop=0;requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.add('show')))};
+  const swap=()=>{inner.innerHTML=view(p)();$('#page').scrollTop=0;meter.page(p);requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.add('show')))};
   if(wasOpen&&cur!==p){setTimeout(swap,220)}else{swap()}
   document.body.classList.add('open');cur=p;
   try{history.replaceState(null,'','#'+p)}catch(e){}
